@@ -1,25 +1,26 @@
-SRCS	=	main.c
-INCS = test.h
+SRCSF =	main.c example.c
+INCSF =	example.h
+OBJSF = $(patsubst %.c,%.o, $(SRCSF))
 
+DIRSRC = src/
+DIROBJ = obj/
+DIRINC = include/
 
-OBJS = $(patsubst %.c,obj/%.o, $(SRCS))
+SRCS = $(patsubst %.c,$(DIRSRC)%.c, $(SRCSF))
+OBJS = $(patsubst %.c,$(DIROBJ)%.o, $(SRCSF))
+INCS = $(patsubst %.h,$(DIRINC)%.h, $(INCSF))
 
 NAME = program
 all: $(NAME)
-
 CC = cc
 CFLAGS = -g -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-CCC = cc
-CCFLAGS = -g -Imlx
+OFLAGS = -g -Imlx -I$(DIRINC)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
-main.c: test.h
-	@echo "Header changed!"
-
-obj/%.o: %.c 
-	$(CCC) $(CCFLAGS) -o $@ -c $<
-
+$(DIROBJ)%.o: $(DIRSRC)%.c $(INCS) 
+	$(CC) $(OFLAGS) -o $@ -c $<
+	
 .PHONY: all $(NAME) 
