@@ -13,11 +13,14 @@ INCS = $(patsubst %.h,$(DIRINC)%.h, $(INCSF))
 NAME = program
 all: $(NAME)
 CC = cc
-CFLAGS = -g -Lmlx -lmlx -framework OpenGL -framework AppKit
+CFLAGS = -g -Lmlx -lmlx -lmlx -lz -lm -framework OpenGL -framework AppKit
 
 OFLAGS = -g -Imlx -I$(DIRINC)
 
-$(NAME): $(OBJS)
+mlx:
+	@make -s -C mlx
+
+$(NAME): $(OBJS) mlx
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
 $(DIROBJ)%.o: $(DIRSRC)%.c $(INCS) 
