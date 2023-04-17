@@ -1,0 +1,5 @@
+./program
+*.swp
+*.obj
+obj/
+

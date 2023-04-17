@@ -11,8 +11,13 @@ int	main(void)
 	
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img = mlx_png_file_to_image(mlx, "assets/tile30.png", &width, &height);
-	mlx_put_image_to_window(mlx, mlx_win, img, 0, 0);
+	img = mlx_png_file_to_image(mlx, "assets/tile_dirt.png", &width, &height);
+	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 0, 96 * 0);
+	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 1, 96 * 0);
+	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 2, 96 * 0);
+	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 0, 96 * 1);
+	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 1, 96 * 1);
+	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 2, 96 * 1);
 	mlx_loop(mlx);
 }
 
