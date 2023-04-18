@@ -9,31 +9,27 @@ DIROBJ = obj/
 DIRINC = include/
 DIRLIB = lib/
 
+# All relative to Makefile's folder
 SRCS = $(patsubst %.c,$(DIRSRC)%.c, $(SRCSF))
 OBJS = $(patsubst %.c,$(DIROBJ)%.o, $(SRCSF))
 INCS = $(patsubst %.h,$(DIRINC)%.h, $(INCSF))
-LIBS = $(patsubst %.a,$(DIRLIB)%.a, $(SRCSF))
-LIBNAMES = $(basename $(notdir $(LIBSF)))
-$(info $(LIBNAMES))
+LIBS = $(patsubst %.a,$(DIRLIB)%.a, $(LIBSF))
+
+LIB-I = $(patsubst %,-I%,$(dir $(LIBS)))
+LIB-l = $(subst lib,-l,$(basename $(notdir $(LIBSF))))
+LIB-L = $(patsubst %,-L$(DIRLIB)%, $(dir $(LIBSF)))
 
 NAME = program
 all: $(NAME)
 CC = cc
 
-CFLAGS = $(DFLAGS) -Lmlx -lmlx -Llibft -lft -Lgnl -lgnl -lz -lm -framework OpenGL -framework AppKit
-OFLAGS = $(DFLAGS) -Imlx -I$(DIRINC)
+CFLAGS = $(DFLAGS) $(LIB-L) $(LIB-l) -lz -lm -framework OpenGL -framework AppKit
+OFLAGS = $(DFLAGS) $(LIB-I) -I$(DIRINC)
 
-mlx: mlx/libmlx.a  
-mlx/libmlx.a:
-	make -s -C mlx DFLAGS=$(DFLAGS)
-ft: libft/libft.a  
-libft/libft.a: 
-	make -s -C libft DFLAGS=$(DFLAGS)
-gnl: gnl/libgnl.a
-gnl/libgnl.a:
-	make -s -C gnl DFLAGS=$(DFLAGS)
+$(LIBS):
+	@make -s -C $(dir $@)
 
-$(NAME): $(OBJS) mlx ft gnl 
+$(NAME): $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
 $(DIROBJ)%.o: $(DIRSRC)%.c $(INCS) 
@@ -41,11 +37,16 @@ $(DIROBJ)%.o: $(DIRSRC)%.c $(INCS)
 	$(CC) $(OFLAGS) -o $@ -c $<
 
 
-fclean: clean
+fclean: clean libclean libfclean
 	@-rm -f $(NAME)
-	@-make -s -C mlx clean
-	@-make -s -C gnl fclean
-	@-make -s -C libft fclean
+
+libclean:
+	@-make -s -C $(DIRLIB)/mlx clean
+
+libfclean:
+	@-make -s -C $(DIRLIB)/gnl fclean
+	@-make -s -C $(DIRLIB)/libft fclean
+	
 
 clean:
 	@-rm -rf $(DIROBJ)

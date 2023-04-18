@@ -21,14 +21,14 @@ t_map	*loadmap(const char* path)
 	t_list	*lst;
 	int		i;
 
+
 	fd = open(path, O_RDONLY);
 	line = get_next_line(fd);
+	lst = NULL:
 	while (line)
 	{
-		while (line[i])
-		{
-			if (line[i])
-		}
+		lst = lst_add_front(&lst, lst_new(line));
 		line = get_next_line(fd);
 	}
+	void;
 }
