@@ -17,7 +17,7 @@ int	main(void)
 	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 2, 96 * 0);
 	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 0, 96 * 1);
 	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 1, 96 * 1);
-	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 2, 96 * 1);
+	mlx_put_image_to_window(mlx, mlx_win, img, 1 + 96 * 2, 1+ 96 * 1);
 	mlx_loop(mlx);
 }
 
