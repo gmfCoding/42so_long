@@ -1,4 +1,4 @@
-typedef t_vecd float
+typedef float t_vecd;
 
 typedef struct	s_vec
 {

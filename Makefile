@@ -1,4 +1,4 @@
-SRCSF =	main.c example.c lst_readfile.c map.c
+SRCSF =	main.c example.c lst_readfile.c map.c vector.c vectormath.c tile.c
 INCSF =	example.h
 OBJSF = $(patsubst %.c,%.o, $(SRCSF))
 

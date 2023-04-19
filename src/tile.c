@@ -5,7 +5,7 @@ t_tile	new_tile(int id)
 	t_tile tile;
 	
 	tile.id = id;
-	tile.collectale = 0;
+	tile.collectable = 0;
 	return (tile);
 }
 
@@ -14,6 +14,6 @@ t_tile new_c_tile(int floor, int collectable)
 	t_tile	tile;
 
 	tile = new_tile(floor);
-	tile.collectale = collectable;
+	tile.collectable = collectable;
 	return (tile);
 }

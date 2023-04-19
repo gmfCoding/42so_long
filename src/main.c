@@ -2,7 +2,6 @@
 #include "example.h"
 #include "map.h"
 
-
 typedef struct	s_gamestate
 {
 	void	*mlx;
@@ -17,6 +16,8 @@ typedef struct	s_gamestate
 	t_vec playerPos;
 }			t_gamestate;
 
+void	setup_state(t_gamestate *state);
+
 int	main(void)
 {
 	static	t_gamestate state;
@@ -24,7 +25,7 @@ int	main(void)
 	state.mlx = mlx_init();
 	state.win = mlx_new_window(state.mlx, 1920, 1080, "Hello world!");
 	setup_state(&state);
-	mlx_loop(mlx);
+	mlx_loop(state.mlx);
 }
 
 
@@ -37,9 +38,9 @@ void	*get_tile_image(t_gamestate *state, int id)
 	if (!state->tile_images[id])
 	{
 		if (id == TILE_FLOOR)
-			state->tiles_images[id] = mlx_png_file_to_image(state->mlx, "assets/tile_dirt.png", &x, &y);
+			state->tile_images[id] = mlx_png_file_to_image(state->mlx, "assets/tile_dirt.png", &x, &y);
 		else if (id == TILE_WALL)
-			state->tiles_images[id] = mlx_png_file_to_image(state->mlx, "assets/tile_wall.png", &x, &y);
+			state->tile_images[id] = mlx_png_file_to_image(state->mlx, "assets/tile_wall.png", &x, &y);
 	}	
 	return (state->tile_images[id]);
 }
@@ -64,7 +65,7 @@ void setup_world(t_gamestate *state)
 
 }
 
-void	setupstate(t_gamestate *state)
+void	setup_state(t_gamestate *state)
 {
 	setup_world(state);
 	

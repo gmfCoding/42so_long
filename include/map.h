@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 20:21:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/19 21:44:24 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/19 23:22:12 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@
 # define TILE_FLOOR		2
 # define TILE_EXIT		3
 # define TILE_COLLECT	4
+# define TILE_COUNT 5
+
+# include "vector.h"
 
 typedef struct s_tile
 {
 	int id;
 	int collectable;
-}				t_tile
+}				t_tile;
 
 typedef struct	s_map
 {
@@ -35,6 +38,7 @@ typedef struct	s_map
 	t_tile* tiles;
 }			t_map;
 
-t_tile	tile_new(int id, int collectable);
+t_tile	new_c_tile(int id, int collectable);
+t_tile	new_tile(int id);
 t_map	*load_map(const char* path);
 #endif
