@@ -1,5 +1,6 @@
 #include <mlx.h>
 #include "example.h"
+#include "map.h"
 
 int	main(void)
 {
@@ -8,10 +9,11 @@ int	main(void)
 	void	*img;
 	int height;
 	int width;
-	
+	t_map	*map = loadmap("assets/example.ber");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
 	img = mlx_png_file_to_image(mlx, "assets/tile_dirt.png", &width, &height);
+	
 	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 0, 96 * 0);
 	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 1, 96 * 0);
 	mlx_put_image_to_window(mlx, mlx_win, img, 96 * 2, 96 * 0);

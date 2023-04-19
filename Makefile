@@ -1,4 +1,4 @@
-SRCSF =	main.c example.c
+SRCSF =	main.c example.c lst_readfile.c map.c
 INCSF =	example.h
 OBJSF = $(patsubst %.c,%.o, $(SRCSF))
 
@@ -7,7 +7,7 @@ LIBSF = libft/libft.a gnl/libgnl.a mlx/libmlx.a
 DIRSRC = src/
 DIROBJ = obj/
 DIRINC = include/
-DIRLIB = lib/
+DIRLIB = .lib/
 
 # All relative to Makefile's folder
 SRCS = $(patsubst %.c,$(DIRSRC)%.c, $(SRCSF))
@@ -27,7 +27,7 @@ CFLAGS = $(DFLAGS) $(LIB-L) $(LIB-l) -lz -lm -framework OpenGL -framework AppKit
 OFLAGS = $(DFLAGS) $(LIB-I) -I$(DIRINC)
 
 $(LIBS):
-	@make -s -C $(dir $@)
+	-make -s -C $(dir $@) all bonus
 
 $(NAME): $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@
