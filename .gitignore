@@ -1,5 +1,7 @@
 program
-*.swp
-*.obj
-obj/
+**/*.swp
+**/*.swo
+**/*.o
+**/*.a
+**/obj/
 
