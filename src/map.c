@@ -24,15 +24,15 @@ t_map	*loadmap(const char* path)
 		while (((char *)(lst->content))[x])
 		{
 			if (((char *)(lst->content))[x] == '#')
-				map->tiles[y * map->sizeX + x] = TILE_WALL;
+				map->tiles[y * map->sizeX + x] = new_tile(TILE_WALL, 0);
 			else if (((char *)(lst->content))[x] == 'P')
-				map->tiles[y * map->sizeX + x] = TILE_PLAYER;
+				map->tiles[y * map->sizeX + x] = new_tile(TILE_FLOOR, 0);
 			else if (((char *)(lst->content))[x] == '0')
-				map->tiles[y * map->sizeX + x] = TILE_FLOOR;
+				map->tiles[y * map->sizeX + x] = new_tile(TILE_FLOOR, 0);
 			else if (((char *)(lst->content))[x] == 'C')
-				map->tiles[y * map->sizeX + x] = TILE_COLLECT;
+				map->tiles[y * map->sizeX + x] = new_tile(TILE_FLOOR, 1);
 			else if (((char *)(lst->content))[x] == 'E')
-				map->tiles[y * map->sizeX + x] = TILE_EXIT;
+				map->tiles[y * map->sizeX + x] = new_tile(TILE_EXIT, 0);
 			x++;
 		}
 		lst = lst->next;
