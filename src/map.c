@@ -1,15 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
+/*   Updated: 2023/04/19 21:32:41 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "lst_extra.h"
 #include "libft.h"
 #include "map.h"
 
-t_map	*loadmap(const char* path)
+
+static t_tile set_tile(char type, t_map *map)
 {
-	t_list	*lst;
-	t_map	*map;
+	if (type == 'P')
+		map->start = vnew((t_vecd)x, (t_vecd)y); 
+	else if (type == 'E')
+		map->exit = vnew((t_vecd)x, (t_vecd)y);
+	else if (type == '#')
+		return (new_tile(TILE_WALL);
+	else if (type == 'C')
+		return (new_c_tile(TILE_FLOOR, 1));
+	return (new_tile(TILE_FLOOR));
+}
+
+static void	set_tiles(t_list *lst, t_map *map)
+{
 	int x;
 	int y;
 
 	y = 0;
+	while (lst->content)
+	{
+		x = 0;
+		while (((char *)(lst->content))[x])
+		{
+			map->tiles[y * map->sizeX + x] = set_tile((char *)(lst->content)[x]);
+			x++;
+		}
+		lst = lst->next;
+		y++;
+	}
+}
+
+t_map	*load_map(const char* path)
+{
+	t_list	*lst;
+	t_map	*map;
+
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
 		return (NULL);
@@ -18,25 +61,6 @@ t_map	*loadmap(const char* path)
 	lst = lst->next;
 	map->sizeX = ft_strlen(lst->next->content) - 1;
 	map->tiles = ft_calloc(map->sizeX * map->sizeY, sizeof(int));
-	while (lst->content)
-	{
-		x = 0;
-		while (((char *)(lst->content))[x])
-		{
-			if (((char *)(lst->content))[x] == '#')
-				map->tiles[y * map->sizeX + x] = new_tile(TILE_WALL, 0);
-			else if (((char *)(lst->content))[x] == 'P')
-				map->tiles[y * map->sizeX + x] = new_tile(TILE_FLOOR, 0);
-			else if (((char *)(lst->content))[x] == '0')
-				map->tiles[y * map->sizeX + x] = new_tile(TILE_FLOOR, 0);
-			else if (((char *)(lst->content))[x] == 'C')
-				map->tiles[y * map->sizeX + x] = new_tile(TILE_FLOOR, 1);
-			else if (((char *)(lst->content))[x] == 'E')
-				map->tiles[y * map->sizeX + x] = new_tile(TILE_EXIT, 0);
-			x++;
-		}
-		lst = lst->next;
-		y++;
-	}
+	set_tiles(lst, map);
 	return (map);
 }

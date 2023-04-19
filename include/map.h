@@ -6,13 +6,13 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 20:21:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/19 20:22:05 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/19 21:44:24 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
-# define TILE_PLAYER		0
+# define TILE_PLAYER	0
 # define TILE_WALL		1
 # define TILE_FLOOR		2
 # define TILE_EXIT		3
@@ -22,18 +22,19 @@ typedef struct s_tile
 {
 	int id;
 	int collectable;
-}
+}				t_tile
 
 typedef struct	s_map
 {
-	int	sizeX;
-	int sizeY;
+	int	size_x;
+	int size_y;
 
-	int start_pos;
+	t_vec start;
+	t_vec exit;
 
-	int* tiles;
+	t_tile* tiles;
 }			t_map;
 
 t_tile	tile_new(int id, int collectable);
-t_map	*loadmap(const char* path);
+t_map	*load_map(const char* path);
 #endif
