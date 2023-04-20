@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/19 23:22:58 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/20 14:04:01 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_map	*load_map(const char* path)
 	map->size_y = (int)lst->content;
 	lst = lst->next;
 	map->size_x = ft_strlen(lst->next->content) - 1;
-	map->tiles = ft_calloc(map->size_x * map->size_y, sizeof(int));
+	map->tiles = ft_calloc(map->size_x * map->size_y, sizeof(t_tile));
 	set_tiles(lst, map);
 	return (map);
 }

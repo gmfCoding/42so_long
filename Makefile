@@ -41,11 +41,11 @@ fclean: clean libclean libfclean
 	@-rm -f $(NAME)
 
 libclean:
-	@-make -s -C $(DIRLIB)/mlx clean
+	-make -s -C $(DIRLIB)mlx clean
 
 libfclean:
-	@-make -s -C $(DIRLIB)/gnl fclean
-	@-make -s -C $(DIRLIB)/libft fclean
+	-make -s -C $(DIRLIB)gnl fclean
+	-make -s -C $(DIRLIB)libft fclean
 	
 
 clean:

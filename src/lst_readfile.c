@@ -1,4 +1,6 @@
 #include <fcntl.h>
+#include <unistd.h>
+
 #include "libft.h"
 #include "get_next_line.h"
 
@@ -22,6 +24,7 @@ t_list	*ft_lst_readfile(const char* path)
 		*(first->content)++;
 		line = get_next_line(fd);
 	}
+	close (fd);
 	next->next = ft_lstnew(NULL);
 	return (first);
 }

@@ -32,15 +32,15 @@ int	main(void)
 
 void	*get_tile_image(t_gamestate *state, int id)
 {
-	int x;
-	int y;
+	static int x;
+	static int y;
 
 	if (!state->tile_images[id])
 	{
 		if (id == TILE_FLOOR)
-			state->tile_images[id] = mlx_png_file_to_image(state->mlx, "assets/tile_dirt.png", &x, &y);
+			state->tile_images[id] =  mlx_xpm_file_to_image(state->mlx, "assets/tile_dirt.xpm", &x, &y);
 		else if (id == TILE_WALL)
-			state->tile_images[id] = mlx_png_file_to_image(state->mlx, "assets/tile_wall.png", &x, &y);
+			state->tile_images[id] =  mlx_xpm_file_to_image(state->mlx, "assets/tile_wall.xpm", &x, &y);
 	}	
 	return (state->tile_images[id]);
 }
