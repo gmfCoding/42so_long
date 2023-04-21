@@ -1,20 +1,8 @@
 #include <mlx.h>
 #include "example.h"
 #include "map.h"
-
-typedef struct	s_gamestate
-{
-	void	*mlx;
-	void	*win;
-	
-	int		w_width;
-	int		w_height;
-
-	void	*tile_images[TILE_COUNT];
-	
-	t_map	*map;
-	t_vec playerPos;
-}			t_gamestate;
+#include "state.h"
+#include "render.h"
 
 void	setup_state(t_gamestate *state);
 
@@ -25,6 +13,8 @@ int	main(void)
 	state.mlx = mlx_init();
 	state.win = mlx_new_window(state.mlx, 1920, 1080, "Hello world!");
 	setup_state(&state);
+	
+	mlx_loop_hook(mlx, frame, &state);
 	mlx_loop(state.mlx);
 }
 
