@@ -45,30 +45,30 @@ $(NAME): $(OBJS) $(LIBS)
 	@$(CC) $(OBJS) $(CFLAGS) -o $@
 
 # SOURCE TO OBJ
-$(OBJS): $(DIROBJ)%.o : $(DIRSRC)%.c $(INCS) 
+$(OBJS): $(DIROBJ)%.o : $(DIRSRC)%.c $(INCS)
 	@mkdir -p $(DIROBJ)
 	$(CC) $(OFLAGS) -o $@ -c $<
 
 # COMPILE LIBS
 $(LIBS):
-	@-echo "\n${GREEN}Compiling Libraries:${BLUE}$@ ${NC}"
-ifeq ($(findstring mlx,$@),mlx)
-	@-echo "\n${GREEN}NO BONUS${BLUE}$@ ${NC}"
-	@-make -s -C $(dir $@) all
-else
-	@-echo "\n${GREEN}DOING: BONUS${BLUE}$@ ${NC}"
-	@-make -s -C $(dir $@) all bonus
-endif
+	@-echo "\n${GREEN}Compiling Library: ${BLUE}$@ ${NC}"
+	@if [ "$(notdir $@)" = "libft.a" ]; then \
+		make -s -C $(dir $@) all bonus; \
+	else \
+		make -s -C $(dir $@) all; \
+	fi
 
 # CLEANING
 fclean: libclean clean
 	-rm -f $(NAME)
 	@-echo "${GREEN}DONE CLEANING!${NC}"
 
-makedirs = $(dir $(shell find .lib -name "Makefile"))
+libclean_cleanf = $(dir $(shell find .lib -name "Makefile" -and -not -path "*mlx*"))
+libclean_clean = $(dir $(shell find .lib -name "Makefile" -and -path "*mlx*"))
 libclean:
-	@-echo "\n${GREEN}Cleaning Libraries: ${CYAN}$(basename $(makedirs))${NC}"
-	@-$(foreach dir,$(makedirs),echo "\n${GREEN}Cleaning: ${CYAN} $(dir) ${NC}";make -i --no-print-directory -C $(dir) clean fclean;)
+	@-echo "\n${GREEN}Cleaning Libraries: ${CYAN}$(basename $(libclean_cleanf)) $(basename $(libclean_clean))${NC}"
+	@-$(foreach dir,$(libclean_cleanf),echo "\n${GREEN}Cleaning: ${CYAN} $(dir) ${NC}";make -i --no-print-directory -C $(dir) clean fclean;)
+	@-$(foreach dir,$(libclean_clean),echo "\n${GREEN}Cleaning: ${CYAN} $(dir) ${NC}";make -i --no-print-directory -C $(dir) clean;)
 
 clean:
 	-rm -rf $(DIROBJ)
