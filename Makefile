@@ -2,7 +2,15 @@ SRCSF =	main.c example.c lst_readfile.c map.c vector.c vectormath.c tile.c
 INCSF =	example.h
 OBJSF = $(patsubst %.c,%.o, $(SRCSF))
 
-LIBSF = libft/libft.a gnl/libgnl.a mlx/libmlx.a
+LIBSF = libft/libft.a gnl/libgnl.a
+
+$(info $(OS))
+
+ifeq ($(OS),linux)
+	LIBSF += mlx-linux/mlxlib.a
+else
+	LIBSF += mlx/mlxlib.a
+endif
 
 DIRSRC = src/
 DIROBJ = obj/
@@ -23,7 +31,11 @@ NAME = program
 all: $(NAME)
 CC = cc
 
-CFLAGS = $(DFLAGS) $(LIB-L) $(LIB-l) -lz -lm -framework OpenGL -framework AppKit
+CFLAGS = $(DFLAGS) $(LIB-L) $(LIB-l) -lz -lm 
+ifneq ($(OS),linux)
+CFLAGS += -framework OpenGL -framework AppKit
+endif
+
 OFLAGS = $(DFLAGS) $(LIB-I) -I$(DIRINC)
 
 $(LIBS):
@@ -51,4 +63,4 @@ libfclean:
 clean:
 	@-rm -rf $(DIROBJ)
 
-.PHONY: all $(NAME) fclean clean 
+.PHONY: all $(NAME) fclean clean libclean libfclean linux

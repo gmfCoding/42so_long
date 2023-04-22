@@ -45,7 +45,7 @@ char	*ft_itoa(int n)
 	count = nb_len(ni);
 	if (n < 0)
 		ni = 0L - n;
-		str = ft_calloc(count + 1 + (n < 0), sizeof(char));
+	str = ft_calloc(count + 1 + (n < 0), sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	if (n == 0)

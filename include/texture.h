@@ -9,6 +9,14 @@ typedef struct	s_texture
 	int		endian;
 }				t_texture;
 
+typedef struct	s_sprite
+{
+	t_texture	tex;
+	t_vec		pos;
+}				t_sprite;
+
+t_sprite	*instance(t_texture tex, t_vec pos);
+
 t_texture create_texture(void *mlx, int width, int height);
 
 t_texture copy_texture(void *mlx, t_texture tex, t_vec start, t_vec end, int scale);
