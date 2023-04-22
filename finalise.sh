@@ -4,8 +4,8 @@ try_delete ()
 	if [[ $REPLY =~ ^[Yy]$ ]]
 	then
 		echo -e "\033[1;31mDELETING:\033[0m"
-		# exe rm -rf .vscode
-		# exe rm -rf finalise.sh
+		exe rm -rf .vscode
+		exe rm -rf finalise.sh
 	elif [[ ! $REPLY =~ ^[Nn]$ ]] && [[ ! -z $REPLY ]]
 	then
 		echo -e "\033[1;31mUnknown, try again!\033[0m"
