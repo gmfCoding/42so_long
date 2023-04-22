@@ -1,3 +1,5 @@
+#ifndef VECTOR_H
+# define VECTOR_H
 typedef float t_vecd;
 
 typedef struct	s_vec
@@ -7,4 +9,4 @@ typedef struct	s_vec
 }				t_vec;
 
 t_vec vnew(t_vecd x, t_vecd y);
- 
+#endif

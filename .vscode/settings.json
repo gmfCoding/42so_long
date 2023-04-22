@@ -1,0 +1,13 @@
+{
+	"C_Cpp.default.includePath": ["${workspaceFolder}\\include",  "${workspaceFolder}\\.lib\\mlx", "${workspaceFolder}\\.lib\\libft", "${workspaceFolder}\\.lib\\gnl"],
+	"files.associations": {
+		"state.h": "c",
+		"render.h": "c",
+		"libft.h": "c",
+		"texture.h": "c",
+		"stddef.h": "c",
+		"vector.h": "c",
+		"theme.h": "c"
+	},
+	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
+}

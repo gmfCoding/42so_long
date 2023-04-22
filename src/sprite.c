@@ -1,3 +1,5 @@
+#include "texture.h"
+#include <stddef.h>
 
 t_sprite	*instance(t_texture tex, t_vec pos)
 {

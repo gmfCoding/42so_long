@@ -9,7 +9,9 @@
 /*   Updated: 2023/04/19 16:05:00 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#ifndef LST_EXTRA_H
+# define LST_EXTRA_H
+# include "libft.h"
 
 /*	Loads a file at the given 'path', into a linked list
  *	RETURNS:
@@ -20,3 +22,4 @@
  *	(ft_listsize(lst) - 2)
  */
 t_list	*ft_lst_readfile(const char* path);
+#endif

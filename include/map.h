@@ -12,6 +12,7 @@
 
 #ifndef MAP_H
 # define MAP_H
+
 # define TILE_PLAYER	0
 # define TILE_WALL		1
 # define TILE_FLOOR		2

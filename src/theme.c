@@ -13,7 +13,7 @@
 
 #include "theme.h"
 
-static	t_texture subimage(void *mlx, int x, int y, t_texture *entire)
+static	t_texture subimage(void *mlx, int x, int y, t_texture entire)
 {
 	t_texture	img;
 	t_vec		start;
@@ -32,12 +32,11 @@ t_themeinfo	*load_theme(t_gamestate *state, const char* themeimg)
 	int			i;
 
 	theme = ft_calloc(1, sizeof(t_themeinfo));
+	theme->entire = load_texture(state->mlx, themeimg);
 	i = 0;
-	entire = load_texture(state.mlx, themeimg);
-	theme.entire = entire;
-	while (images < SUB_TILE_COUNT)
+	while (i < SUB_TILE_COUNT)
 	{
-		theme.subimgs[i] = subimage(state.mlx, i % SHEET_X, i / SHEET_X, tex);
+		theme->subimgs[i] = subimage(state->mlx, i % SHEET_WIDTH, i / SHEET_WIDTH, tex);
 		i++;
 	}
 	return (theme);

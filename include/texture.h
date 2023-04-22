@@ -1,3 +1,8 @@
+#ifndef TEXTURE_H
+# define TEXTURE_H
+
+#include "vector.h"
+
 typedef struct	s_texture
 {
 	void	*img;
@@ -22,3 +27,4 @@ t_texture create_texture(void *mlx, int width, int height);
 t_texture copy_texture(void *mlx, t_texture tex, t_vec start, t_vec end, int scale);
 
 t_texture load_texture(void *mlx, const char *path);
+#endif

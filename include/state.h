@@ -1,3 +1,9 @@
+#ifndef STATE_H
+# define STATE_H
+# include "libft.h"
+# include "texture.h"
+# include "map.h"
+
 typedef struct	s_gamestate
 {
 	void		*mlx;
@@ -12,5 +18,4 @@ typedef struct	s_gamestate
 	t_map		*map;
 	t_sprite	*player;
 }			t_gamestate;
-
-
+#endif
