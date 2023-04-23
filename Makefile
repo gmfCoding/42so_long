@@ -1,4 +1,4 @@
-SRCSF =	main.c lst_readfile.c map.c vector.c vectormath.c tile.c render.c sprite.c texture.c theme.c
+SRCSF =	main.c lst_readfile.c map.c vector.c vectormath.c tile.c render.c sprite.c texture.c theme.c input.c
 
 OBJSF = $(patsubst %.c,%.o, $(SRCSF))
 

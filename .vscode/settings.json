@@ -1,5 +1,5 @@
 {
-	"C_Cpp.default.includePath": ["${workspaceFolder}\\include",  "${workspaceFolder}\\.lib\\mlx", "${workspaceFolder}\\.lib\\libft", "${workspaceFolder}\\.lib\\gnl"],
+	"C_Cpp.default.includePath": ["${workspaceFolder}\\include",  "${workspaceFolder}\\.lib\\mlx", "${workspaceFolder}\\.lib\\libft", "${workspaceFolder}\\.lib\\gnl", "${workspaceFolder}\\.lib\\ftprintf"],
 	"files.associations": {
 		"state.h": "c",
 		"render.h": "c",
@@ -7,7 +7,8 @@
 		"texture.h": "c",
 		"stddef.h": "c",
 		"vector.h": "c",
-		"theme.h": "c"
+		"theme.h": "c",
+		"mlx_int.h": "c"
 	},
 	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
 }

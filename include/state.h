@@ -8,6 +8,7 @@ typedef struct	s_gamestate
 {
 	void		*mlx;
 	void		*win;
+	int			logfile;
 	
 	int			w_width;
 	int			w_height;

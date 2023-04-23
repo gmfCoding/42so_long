@@ -2,18 +2,25 @@
 #include "map.h"
 #include "state.h"
 #include "render.h"
+#include <fcntl.h>
+#include "ft_printf.h"
 
 void	setup_state(t_gamestate *state);
+void on_input(int key, t_gamestate *state);
 
 int	main(void)
 {
 	static	t_gamestate state;
-
+	
+	state.logfile = open("output.log", O_WRONLY);
 	state.mlx = mlx_init();
 	state.win = mlx_new_window(state.mlx, 1920, 1080, "Hello world!");
+
+	ft_printf("world");
 	setup_state(&state);
-	
 	mlx_loop_hook(state.mlx, on_frame, &state);
+	mlx_hook(state.win, 2, 0, on_input, (void *)&state);
+	mlx_hook(state.win, 3, 0, on_input, (void *)&state);
 	mlx_loop(state.mlx);
 }
 
