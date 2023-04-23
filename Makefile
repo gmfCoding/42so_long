@@ -2,7 +2,7 @@ SRCSF =	main.c lst_readfile.c map.c vector.c vectormath.c tile.c render.c sprite
 
 OBJSF = $(patsubst %.c,%.o, $(SRCSF))
 
-LIBSF = libft/libft.a gnl/libgnl.a
+LIBSF = libft/libft.a gnl/libgnl.a ftprintf/libftprintf.a
 
 ifeq ($(OS),linux)
 	LIBSF += mlx-linux/libmlx.a

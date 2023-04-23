@@ -8,6 +8,12 @@
 void	setup_state(t_gamestate *state);
 void on_input(int key, t_gamestate *state);
 
+int	end_program(t_gamestate *state)
+{
+	ft_printf("closed!");
+	exit(0);
+}
+
 int	main(void)
 {
 	static	t_gamestate state;
@@ -21,6 +27,7 @@ int	main(void)
 	mlx_loop_hook(state.mlx, on_frame, &state);
 	mlx_hook(state.win, 2, 0, on_input, (void *)&state);
 	mlx_hook(state.win, 3, 0, on_input, (void *)&state);
+	mlx_hook(state.win, 17, 0, end_program, &state);
 	mlx_loop(state.mlx);
 }
 
