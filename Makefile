@@ -4,7 +4,13 @@ OBJSF = $(patsubst %.c,%.o, $(SRCSF))
 
 LIBSF = libft/libft.a gnl/libgnl.a ftprintf/libftprintf.a
 
-ifeq ($(OS),linux)
+ifndef $(OS)
+OS := $(shell uname)
+endif
+
+$(info Compiling for OS:$(OS))
+
+ifeq ($(OS),Linux)
 	LIBSF += mlx-linux/libmlx.a
 else
 	LIBSF += mlx/libmlx.a
@@ -31,10 +37,10 @@ CC = cc
 OFLAGS = $(DFLAGS) $(LIB-I) -I$(DIRINC)
 CFLAGS = $(DFLAGS) $(LIB-L) $(LIB-l) -lz -lm 
 
-ifneq ($(OS),linux) 
+ifneq ($(OS),Linux) 
 CFLAGS += -framework OpenGL -framework AppKit 
 else 
-CFLAGS += -lX11 -lXext
+CFLAGS += -lX11 -lXext -DKEYMAP_LINUX
 endif
 
 # RULES
