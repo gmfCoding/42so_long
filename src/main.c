@@ -17,9 +17,9 @@
 #include <fcntl.h>
 #include "ft_printf.h"
 #include <stdlib.h>
+#include "input.h"
 
 void	setup_state(t_gamestate *state);
-int	on_input(int key, t_gamestate *state);
 
 int	end_program(t_gamestate *state)
 {
@@ -50,8 +50,10 @@ int	main(void)
 	ft_printf("Welcome to so_long!");
 	setup_state(&state);
 	mlx_loop_hook(state.mlx, on_frame, &state);
-	mlx_hook(state.win, 2, 1L << 0, on_input, (void *)&state);
-	//mlx_hook(state.win, 3, 0, on_input, (void *)&state);
+	mlx_do_key_autorepeatoff(state.mlx);
+	mlx_hook(state.win, 2, 1L << 0, on_input_press, (void *)&state);
+	mlx_hook(state.win, 3, 1L << 1, on_input_release, (void *)&state);
+
 	mlx_hook(state.win, 17, 0, end_program, &state);
 	mlx_loop(state.mlx);
 }
@@ -62,22 +64,9 @@ void setup_world(t_gamestate *state)
 	int y;
 	t_map	*map = load_map("assets/example.ber");
 	state->map = map;	
-	// y = 0;
-	// while (y < map->size_y)
-	// {
-	// 	x = 0;
-	// 	while (x < map->size_x)
-	// 	{
-	// 		mlx_put_image_to_window(state->mlx, state->win, get_tile_image(state, map->tiles[y * map->size_x + x].id) , 96 * x, 96 * y);	
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-
 }
 
 void	setup_state(t_gamestate *state)
 {
 	setup_world(state);
-	
 }

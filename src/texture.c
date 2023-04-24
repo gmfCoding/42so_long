@@ -13,8 +13,9 @@ static void	pixel_put(t_texture data, int x, int y, int color)
 static int	pixel_get(t_texture data, int x, int y)
 {
 	char	*dst;
+	
 	dst = data.data + (y * data.line_size + x * (data.bpp / 8));
-	return (*(unsigned int*)dst);
+	return (*(int*)dst);
 }
 
 

@@ -84,6 +84,7 @@ int	on_frame(void *param)
 		}
 		y++;
 	}
+	//printf("pos: (%f, %f)", gs->player->pos.x, gs->player->pos.y);
 	mv_process_frame(gs->player, &gs->move);
 	push_sprite(gs, gs->player);
 	return (0);

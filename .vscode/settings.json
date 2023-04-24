@@ -10,7 +10,10 @@
 		"theme.h": "c",
 		"mlx_int.h": "c",
 		"vectormath.h": "c",
-		"movement.h": "c"
+		"movement.h": "c",
+		"input.h": "c",
+		"ft_printf.h": "c"
 	},
-	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
+	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+	"files.eol": "\n",
 }

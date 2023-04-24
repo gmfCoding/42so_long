@@ -17,6 +17,8 @@ t_vec vnorm(t_vec vec)
 	t_vecd mag;
 
 	mag = vmag(vec);
+	if (mag == 0)
+		return (vnew(0, 0));
 	vec.x /= mag;
 	vec.y /= mag;
 	return (vec);

@@ -40,7 +40,8 @@ CFLAGS = $(DFLAGS) $(LIB-L) $(LIB-l) -lz -lm
 ifneq ($(OS),Linux) 
 CFLAGS += -framework OpenGL -framework AppKit 
 else 
-CFLAGS += -lX11 -lXext -DKEYMAP_LINUX
+CFLAGS += -lX11 -lXext
+OFLAGS += -DKEYMAP_LINUX
 endif
 
 # RULES

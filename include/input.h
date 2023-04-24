@@ -1,3 +1,5 @@
+#ifndef INPUT_H
+# define INPUT_H
 # ifdef KEYMAP_LINUX
 # define KEY_SPACE 31
 # define KEY_APOSTROPH 38
@@ -16,7 +18,7 @@
 # define KEY_8 56
 # define KEY_9 57
 # define KEY_SEMICOLON 58
-# define KEY_PLUS 61q
+# define KEY_PLUS 61
 # define KEY_TILDA 95
 # define KEY_SQBLEFT 90
 # define KEY_TAB 65289
@@ -112,3 +114,8 @@
 # define KEY_RSHIFT 258
 # define KEY_RCTRL 269
 #endif
+# include "state.h"
+int on_input_press(int key, t_gamestate *state);
+int on_input_release(int key, t_gamestate *state);
+
+#endif 

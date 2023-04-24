@@ -13,7 +13,7 @@
 # define MOVEMENT_H
 
 #  ifndef MOVE_SPEED
-#   define MOVE_SPEED 2
+#   define MOVE_SPEED 8
 #  endif
 
 # include "texture.h"

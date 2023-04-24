@@ -16,6 +16,7 @@
 
 int mv_process_input(int key, int press, t_pmove	*move)
 {
+	int test = KEY_W;
 	if (key == KEY_W)
 		move->up = press;
 	if (key == KEY_A)
@@ -35,13 +36,14 @@ int mv_process_frame(t_sprite *sprite, t_pmove *move)
 	speed = 1.0 / FRAMERATE * MOVE_SPEED;
 
 	if (move->up)
-		dir.y = speed;
+		dir.y += -1;
 	if (move->down)
-		dir.y = -speed;
+		dir.y += 1;
 	if (move->right)
-		dir.x = speed;
+		dir.x += 1;
 	if (move->left)
-		dir.x = -speed;
+		dir.x += -1;
+
 	dir = vmuls(vnorm(dir), speed);
 
 	sprite->pos = vadd(sprite->pos, dir);
