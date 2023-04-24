@@ -1,5 +1,6 @@
 #include "texture.h"
 #include "vectormath.h"
+#include <mlx.h>
 
 static void	pixel_put(t_texture data, int x, int y, int color)
 {
@@ -36,12 +37,16 @@ t_texture copy_texture(void *mlx, t_texture tex, t_vec start, t_vec end, int sca
 	
 	size = vsub(end, start);
 	new = create_texture(mlx, size.x * scale, size.y * scale);
+	pos.y = start.y;
 	while (pos.y < size.y * scale)
 	{
+		pos.x = start.x;
 		while (pos.x < size.x * scale)
 		{
 			pixel_put(new, pos.x, pos.y, pixel_get(tex, pos.x / scale, pos.y / scale));
+			pos.x++;
 		}
+		pos.y++;
 	}
 	return (new);	
 }

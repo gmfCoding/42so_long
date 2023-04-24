@@ -6,14 +6,18 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:53:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/21 18:53:40 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/24 17:37:44 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <mlx.h>
+
+#include "movement.h"
 #include "vector.h"
 #include "state.h"
 #include "texture.h"
 #include "libft.h"
-#include <mlx.h>
+#include "ft_printf.h"
+
 
 static void push_sprite(t_gamestate *gs, t_sprite *sprite)
 {
@@ -29,17 +33,27 @@ static void push_sprite(t_gamestate *gs, t_sprite *sprite)
 	mlx_put_image_to_window(mlx, win, tex.img, pos.x, pos.y);
 }
 
+static void define_image(t_gamestate *state, int expected, int id, char *path)
+{
+	void	**images;
+	void	*mlx;
+	int x;
+	int y;
+	
+	if (expected != id)
+		return ;
+
+	mlx = state->mlx;
+	images = state->images;
+	(*images)[id] = mlx_xpm_file_to_img(mlx, path, &x, &y);
+}
+
 void	*get_tile_image(t_gamestate *state, int id)
 {
-	static int x;
-	static int y;
-
 	if (!state->tile_images[id])
 	{
-		if (id == TILE_FLOOR)
-			state->tile_images[id] =  mlx_xpm_file_to_image(state->mlx, "assets/tile_dirt.xpm", &x, &y);
-		else if (id == TILE_WALL)
-			state->tile_images[id] =  mlx_xpm_file_to_image(state->mlx, "assets/tile_wall.xpm", &x, &y);
+		define_image(state, TILE_FLOOR, id, "assets/tile_dirt.xpm");
+		define_image(state, TILE_WALL, id, "assets/tile_wall.xpm");
 	}	
 	return (state->tile_images[id]);
 }
@@ -56,7 +70,7 @@ int	on_frame(void *param)
 	sp_next = gs->sprites;
 	while (sp_next && sp_next->next)
 	{
-		push_sprite(gs, sp_next);
+		push_sprite(gs, sp_next->content);
 		sp_next = sp_next->next;
 	}
 	y = 0;
@@ -70,5 +84,7 @@ int	on_frame(void *param)
 		}
 		y++;
 	}
+	mv_process_movement(gs->player, &gs->move);
+	push_sprite(gs, gs->player);
 	return (0);
 }

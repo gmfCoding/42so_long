@@ -18,5 +18,6 @@ typedef struct	s_gamestate
 	t_list		*sprites;	
 	t_map		*map;
 	t_sprite	*player;
+	t_pmove		move;
 }			t_gamestate;
 #endif

@@ -1,9 +1,12 @@
 #include "state.h"
-#include <mlx_int.h>
 #include "ft_printf.h"
+#define KEYMAP_OSX
+#include "input.h"
 
-void on_input(int key, t_gamestate *state)
+int on_input(int key, t_gamestate *state)
 {
-	ft_printf("%d", key);
-	return (1);
+	if (key == KEY_W)
+		state->player->pos.y += 10;
+	ft_printf("%d\n", key);
+	return (0);
 }

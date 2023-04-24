@@ -1,4 +1,4 @@
-SRCSF =	main.c lst_readfile.c map.c vector.c vectormath.c tile.c render.c sprite.c texture.c theme.c input.c
+SRCSF =	main.c lst_readfile.c map.c vector.c vector_math.c tile.c render.c sprite.c texture.c theme.c input.c vector_math_extra.c
 
 OBJSF = $(patsubst %.c,%.o, $(SRCSF))
 
@@ -63,8 +63,8 @@ fclean: libclean clean
 	-rm -f $(NAME)
 	@-echo "${GREEN}DONE CLEANING!${NC}"
 
-libclean_cleanf = $(dir $(shell find .lib -name "Makefile" -and -not -path "*mlx*"))
-libclean_clean = $(dir $(shell find .lib -name "Makefile" -and -path "*mlx*"))
+libclean_cleanf = $(dir $(shell find $(DIRLIB) -name "Makefile" -and -not -path "*mlx*"))
+libclean_clean = $(dir $(shell find $(DIRLIB) -name "Makefile" -and -path "*mlx*"))
 libclean:
 	@-echo "\n${GREEN}Cleaning Libraries: ${CYAN}$(basename $(libclean_cleanf)) $(basename $(libclean_clean))${NC}"
 	@-$(foreach dir,$(libclean_cleanf),echo "\n${GREEN}Cleaning: ${CYAN} $(dir) ${NC}";make -i --no-print-directory -C $(dir) clean fclean;)
