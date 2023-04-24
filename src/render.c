@@ -44,8 +44,8 @@ static void define_image(t_gamestate *state, int expected, int id, char *path)
 		return ;
 
 	mlx = state->mlx;
-	images = state->images;
-	(*images)[id] = mlx_xpm_file_to_img(mlx, path, &x, &y);
+	images = state->tile_images;
+	images[id] = mlx_xpm_file_to_image(mlx, path, &x, &y);
 }
 
 void	*get_tile_image(t_gamestate *state, int id)
@@ -84,7 +84,7 @@ int	on_frame(void *param)
 		}
 		y++;
 	}
-	mv_process_movement(gs->player, &gs->move);
+	mv_process_frame(gs->player, &gs->move);
 	push_sprite(gs, gs->player);
 	return (0);
 }

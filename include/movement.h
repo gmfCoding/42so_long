@@ -16,6 +16,8 @@
 #   define MOVE_SPEED 2
 #  endif
 
+# include "texture.h"
+
 typedef struct	s_pmove
 {
 	int	left;
@@ -24,6 +26,6 @@ typedef struct	s_pmove
 	int	down;
 }				t_pmove;
 
-int	mv_process_input(t_pmove *move);
+int	mv_process_input(int key, int press, t_pmove *move);
 int	mv_process_frame(t_sprite *sprite, t_pmove *move);
 #endif

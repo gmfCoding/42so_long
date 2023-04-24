@@ -50,7 +50,7 @@ int	main(void)
 	ft_printf("Welcome to so_long!");
 	setup_state(&state);
 	mlx_loop_hook(state.mlx, on_frame, &state);
-	mlx_hook(state.win, 2, 0, on_input, (void *)&state);
+	mlx_hook(state.win, 2, 1L << 0, on_input, (void *)&state);
 	//mlx_hook(state.win, 3, 0, on_input, (void *)&state);
 	mlx_hook(state.win, 17, 0, end_program, &state);
 	mlx_loop(state.mlx);

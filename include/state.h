@@ -3,6 +3,7 @@
 # include "libft.h"
 # include "texture.h"
 # include "map.h"
+# include "movement.h"
 
 typedef struct	s_gamestate
 {

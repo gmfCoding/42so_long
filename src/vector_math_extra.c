@@ -4,7 +4,7 @@
 
 t_vecd vsqrmag(t_vec vec)
 {
-	return (vec.x * vec.x + vec.y * vec.y)
+	return (vec.x * vec.x + vec.y * vec.y);
 }
 
 t_vecd vmag(t_vec vec)
