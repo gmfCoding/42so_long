@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:13:32 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/19 16:05:00 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:17:45 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LST_EXTRA_H
@@ -21,5 +21,5 @@
  *	NOTE: The line count store at the first node should be: 
  *	(ft_listsize(lst) - 2)
  */
-t_list	*ft_lst_readfile(const char* path);
+t_list	*ft_lst_readfile(const char *path);
 #endif

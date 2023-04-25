@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 20:21:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/19 23:22:12 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:17:24 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@
 
 typedef struct s_tile
 {
-	int id;
-	int collectable;
+	int	id;
+	int	collectable;
 }				t_tile;
 
-typedef struct	s_map
+typedef struct s_map
 {
-	int	size_x;
-	int size_y;
+	int		size_x;
+	int		size_y;
 
-	t_vec start;
-	t_vec exit;
+	t_vec	start;
+	t_vec	exit;
 
-	t_tile* tiles;
+	t_tile	*tiles;
 }			t_map;
 
 t_tile	new_c_tile(int id, int collectable);
 t_tile	new_tile(int id);
-t_map	*load_map(const char* path);
+t_map	*load_map(const char *path);
 #endif

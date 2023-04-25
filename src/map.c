@@ -6,20 +6,17 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/20 14:04:01 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:40:09 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 #include "lst_extra.h"
 #include "libft.h"
 #include "map.h"
 
-
-static t_tile set_tile(char type, int x, int y, t_map *map)
+static t_tile	set_tile(char type, int x, int y, t_map *map)
 {
 	if (type == 'P')
-		map->start = vnew((t_vecd)x, (t_vecd)y); 
+		map->start = vnew((t_vecd)x, (t_vecd)y);
 	else if (type == 'E')
 		map->exit = vnew((t_vecd)x, (t_vecd)y);
 	else if (type == '#')
@@ -31,8 +28,9 @@ static t_tile set_tile(char type, int x, int y, t_map *map)
 
 static void	set_tiles(t_list *lst, t_map *map)
 {
-	int x;
-	int y;
+	int		x;
+	int		y;
+	t_tile	tile;
 
 	y = 0;
 	while (lst->content)
@@ -40,7 +38,8 @@ static void	set_tiles(t_list *lst, t_map *map)
 		x = 0;
 		while (((char *)(lst->content))[x])
 		{
-			map->tiles[y * map->size_x + x] = set_tile(((char *)lst->content)[x], x, y, map);
+			tile = set_tile(((char *)lst->content)[x], x, y, map);
+			map->tiles[y * map->size_x + x] = tile;
 			x++;
 		}
 		lst = lst->next;
@@ -48,7 +47,7 @@ static void	set_tiles(t_list *lst, t_map *map)
 	}
 }
 
-t_map	*load_map(const char* path)
+t_map	*load_map(const char *path)
 {
 	t_list	*lst;
 	t_map	*map;

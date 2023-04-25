@@ -6,11 +6,10 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:53:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/24 17:37:44 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:37:00 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
-
 #include "movement.h"
 #include "vector.h"
 #include "state.h"
@@ -18,8 +17,7 @@
 #include "libft.h"
 #include "ft_printf.h"
 
-
-static void push_sprite(t_gamestate *gs, t_sprite *sprite)
+static void	push_sprite(t_gamestate *gs, t_sprite *sprite)
 {
 	t_vec		pos;
 	t_texture	tex;
@@ -33,16 +31,15 @@ static void push_sprite(t_gamestate *gs, t_sprite *sprite)
 	mlx_put_image_to_window(mlx, win, tex.img, pos.x, pos.y);
 }
 
-static void define_image(t_gamestate *state, int expected, int id, char *path)
+static void	define_image(t_gamestate *state, int expected, int id, char *path)
 {
 	void	**images;
 	void	*mlx;
-	int x;
-	int y;
-	
+	int		x;
+	int		y;
+
 	if (expected != id)
 		return ;
-
 	mlx = state->mlx;
 	images = state->tile_images;
 	images[id] = mlx_xpm_file_to_image(mlx, path, &x, &y);
@@ -58,14 +55,32 @@ void	*get_tile_image(t_gamestate *state, int id)
 	return (state->tile_images[id]);
 }
 
-int	on_frame(void *param)
+void	render_map(t_gamestate *gs, t_map *map)
 {
-	t_gamestate *gs;
-	t_list	*sp_next;
-	int x;
-	int y;
+	int	x;
+	int	y;
 
-	gs = (t_gamestate*)param;
+	y = 0;
+	while (y < gs->map->size_y)
+	{
+		x = 0;
+		while (x < gs->map->size_x)
+		{
+			image = get_tile_image(gs, map->tiles[y * map->size_x + x].id);
+			mlx_put_image_to_window(gs->mlx, gs->win, image, 96 * x, 96 * y);
+			x++;
+		}
+		y++;
+	}
+}
+
+int	on_frame(t_gamestaet *gs)
+{
+	t_list	*sp_next;
+	int		x;
+	int		y;
+	void	*image;
+
 	mlx_clear_window(gs->mlx, gs->win);
 	sp_next = gs->sprites;
 	while (sp_next && sp_next->next)
@@ -74,17 +89,7 @@ int	on_frame(void *param)
 		sp_next = sp_next->next;
 	}
 	y = 0;
-	while (y < gs->map->size_y)
-	{
-		x = 0;
-		while (x < gs->map->size_x)
-		{
-			mlx_put_image_to_window(gs->mlx, gs->win, get_tile_image(gs, gs->map->tiles[y * gs->map->size_x + x].id) , 96 * x, 96 * y);	
-			x++;
-		}
-		y++;
-	}
-	//printf("pos: (%f, %f)", gs->player->pos.x, gs->player->pos.y);
+	render_map(gs, gs->map);
 	mv_process_frame(gs->player, &gs->move);
 	push_sprite(gs, gs->player);
 	return (0);

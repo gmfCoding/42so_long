@@ -6,19 +6,19 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 16:43:15 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/24 17:00:46 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:15:49 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MOVEMENT_H
 # define MOVEMENT_H
 
-#  ifndef MOVE_SPEED
-#   define MOVE_SPEED 8
-#  endif
+# ifndef MOVE_SPEED
+#  define MOVE_SPEED 8
+# endif
 
 # include "texture.h"
 
-typedef struct	s_pmove
+typedef struct s_pmove
 {
 	int	left;
 	int	right;

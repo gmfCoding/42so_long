@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/25 17:13:28 by clovell           #+#    #+#             */
+/*   Updated: 2023/04/25 17:14:02 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TEXTURE_H
 # define TEXTURE_H
 
-#include "vector.h"
+# include "vector.h"
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	void	*img;
 	char	*data;
@@ -14,7 +26,7 @@ typedef struct	s_texture
 	int		endian;
 }				t_texture;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
 	t_texture	tex;
 	t_vec		pos;
@@ -22,9 +34,9 @@ typedef struct	s_sprite
 
 t_sprite	*instance(t_texture tex, t_vec pos);
 
-t_texture create_texture(void *mlx, int width, int height);
+t_texture	create_texture(void *mlx, int width, int height);
 
-t_texture copy_texture(void *mlx, t_texture tex, t_vec start, t_vec end, int scale);
+t_texture	copy_texture(void *mlx, t_texture tex, t_vec region[2], int scale);
 
-t_texture load_texture(void *mlx, const char *path);
+t_texture	load_texture(void *mlx, const char *path);
 #endif

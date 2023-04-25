@@ -6,10 +6,9 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/24 16:41:12 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/25 17:04:05 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <mlx.h>
 #include "map.h"
 #include "state.h"
@@ -32,20 +31,20 @@ t_sprite	*create_player(t_gamestate *state)
 	t_texture	img;
 	t_texture	tex;
 
-	img	= load_texture(state->mlx, "assets/player96.xpm");
-	tex = copy_texture(state->mlx, img, vnew(0,0), vnew(32,32), 3);
+	img = load_texture(state->mlx, "assets/player96.xpm");
+	tex = copy_texture(state->mlx, img, vnew(0, 0), vnew(32, 32), 3);
 	mlx_destroy_image(state->mlx, img.img);
-	return (instance(tex, vnew(0,0)));
+	return (instance(tex, vnew(0, 0)));
 }
 
 int	main(void)
 {
-	static	t_gamestate state;
-	
+	static t_gamestate	state;
+
 	state.logfile = open("output.log", O_WRONLY);
 	state.mlx = mlx_init();
 	state.win = mlx_new_window(state.mlx, 1920, 1080, "Hello world!");
-	
+	ft_memset(&state.move, 0, sizeof(t_pmove));
 	state.player = create_player(&state);
 	ft_printf("Welcome to so_long!");
 	setup_state(&state);
@@ -53,17 +52,18 @@ int	main(void)
 	mlx_do_key_autorepeatoff(state.mlx);
 	mlx_hook(state.win, 2, 1L << 0, on_input_press, (void *)&state);
 	mlx_hook(state.win, 3, 1L << 1, on_input_release, (void *)&state);
-
 	mlx_hook(state.win, 17, 0, end_program, &state);
 	mlx_loop(state.mlx);
 }
 
-void setup_world(t_gamestate *state)
+void	setup_world(t_gamestate *state)
 {
-	int x;
-	int y;
-	t_map	*map = load_map("assets/example.ber");
-	state->map = map;	
+	int		x;
+	int		y;
+	t_map	*map;
+
+	map = load_map("assets/example.ber");
+	state->map = map;
 }
 
 void	setup_state(t_gamestate *state)
