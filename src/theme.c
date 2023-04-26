@@ -6,21 +6,34 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 16:32:46 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/25 16:00:54 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/26 17:02:38 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "theme.h"
 
-static t_texture	subimage(void *mlx, int x, int y, t_texture entire)
+static t_texture get_subtile_tex(void *mlx, int x, int y, t_texture enitre)
 {
-	t_texture	imrg;
+	t_texture	tex;
 	t_vec		start;
 	t_vec		end;
-
-	start = vnew(x * SUB_RES, x * SUB_RES);
+	const int res = TILE_RES/4;
+	
+	start = vnew(x, y);
 	end = vnew(x * SUB_RES + SUB_RES, y * SUB_RES + SUB_RES);
-	img = copy_texture(mlx, entire, start, end, TILE_PX_SCALE);
-	return (img);
+	tex = copy_texture(mlx, entire, start, end, TILE_PX_SCALE);
+	return (tex);
+}
+
+
+static t_tiletex	get_tile_tex(void *mlx, int x, t_texture entire)
+{
+	t_tiletex	tile;
+	
+	tile.tl = get_subtile_tex(mlx, x * TILE_RES, 0, entire);	
+	tile.tr = get_subtile_tex(mlx, x * TILE_RES + SUB_RES, 0, entire);	
+	tile.bl = get_subtile_tex(mlx, x * TILE_RES, SUB_RES, entire);	
+	tile.br = get_subtile_tex(mlx, x * TILE_RES + SUB_RES, SUB_RES, entire);	
+	return (tile);
 }
 
 t_themeinfo	*load_theme(t_gamestate *state, const char *themeimg)
@@ -33,10 +46,9 @@ t_themeinfo	*load_theme(t_gamestate *state, const char *themeimg)
 	theme = ft_calloc(1, sizeof(t_themeinfo));
 	theme->entire = load_texture(state->mlx, themeimg);
 	i = 0;
-	while (i < SUB_TILE_COUNT)
+	while (i < TILE_COUNT)
 	{
-		x = i % SHEET_WIDTH;
-		theme->subimgs[i] = subimage(state->mlx, x, i / SHEET_WIDTH, tex);
+		theme->subimgs[i] = subimage(state->mlx, i, tex);
 		i++;
 	}
 	return (theme);
