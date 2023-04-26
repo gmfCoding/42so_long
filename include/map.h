@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 20:21:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/25 17:17:24 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/26 17:48:54 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define TILE_FLOOR		2
 # define TILE_EXIT		3
 # define TILE_COLLECT	4
-# define TILE_COUNT 5
+# define TILE_COUNT 4
 
 # include "vector.h"
 

@@ -6,16 +6,18 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/25 17:04:05 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:51:58 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
+#include <stdlib.h>
+#include <fcntl.h>
+
+#include "theme.h"
 #include "map.h"
 #include "state.h"
 #include "render.h"
-#include <fcntl.h>
 #include "ft_printf.h"
-#include <stdlib.h>
 #include "input.h"
 
 void	setup_state(t_gamestate *state);
@@ -30,9 +32,10 @@ t_sprite	*create_player(t_gamestate *state)
 {
 	t_texture	img;
 	t_texture	tex;
+	const t_vec	region[] = {vnew(0, 0), vnew(32, 32)};
 
 	img = load_texture(state->mlx, "assets/player96.xpm");
-	tex = copy_texture(state->mlx, img, vnew(0, 0), vnew(32, 32), 3);
+	tex = copy_texture(state->mlx, img, region, 3);
 	mlx_destroy_image(state->mlx, img.img);
 	return (instance(tex, vnew(0, 0)));
 }
@@ -48,6 +51,9 @@ int	main(void)
 	state.player = create_player(&state);
 	ft_printf("Welcome to so_long!");
 	setup_state(&state);
+	
+	state.theme = loadtheme(state, "assets/lava_theme.xpm");
+	
 	mlx_loop_hook(state.mlx, on_frame, &state);
 	mlx_do_key_autorepeatoff(state.mlx);
 	mlx_hook(state.win, 2, 1L << 0, on_input_press, (void *)&state);

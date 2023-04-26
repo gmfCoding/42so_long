@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 16:11:47 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/25 16:11:55 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/26 17:40:17 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "texture.h"
@@ -46,7 +46,7 @@ t_texture	copy_texture(void *mlx, t_texture tex, t_vec region[2], int scale)
 	t_vec		size;
 	t_vec		pos;
 
-	size = vsub(region[1] region[0]);
+	size = vsub(region[1], region[0]);
 	new = create_texture(mlx, size.x * scale, size.y * scale);
 	pos.y = region[0].y;
 	while (pos.y < size.y * scale)
@@ -68,5 +68,5 @@ t_texture	load_texture(void *mlx, const char *path)
 
 	t.img = mlx_xpm_file_to_image(mlx, path, &t.width, &t.height);
 	t.data = mlx_get_data_addr(t.img, &t.bpp, &t.line_size, &t.endian);
-	return (tex);
+	return (t);
 }

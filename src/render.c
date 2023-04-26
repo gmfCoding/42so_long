@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:53:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/25 16:37:00 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/26 17:39:39 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -57,6 +57,7 @@ void	*get_tile_image(t_gamestate *state, int id)
 
 void	render_map(t_gamestate *gs, t_map *map)
 {
+	void	*image;
 	int	x;
 	int	y;
 
@@ -74,7 +75,7 @@ void	render_map(t_gamestate *gs, t_map *map)
 	}
 }
 
-int	on_frame(t_gamestaet *gs)
+int	on_frame(t_gamestate *gs)
 {
 	t_list	*sp_next;
 	int		x;

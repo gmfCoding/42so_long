@@ -6,12 +6,12 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:07:05 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/25 17:07:21 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:41:02 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTORMATH_H
-# define VECOTRMATH_H
+# define VECTORMATH_H
 # include "vector.h"
 
 /* Adds a vector to another */
