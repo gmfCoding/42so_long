@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 16:11:47 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 13:28:28 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/27 16:38:21 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "texture.h"
@@ -40,15 +40,16 @@ t_texture	create_texture(void *mlx, int width, int height)
 	return (t);
 }
 
-t_texture	copy_texture(void *mlx, t_texture tex, const t_vec region[2], int scale)
+t_texture	copy_tex(void *mlx, t_texture tex, const t_vec reg[2], int scale)
 {
 	t_texture	new;
 	t_vec		size;
 	t_vec		pos;
-	t_vec		start;
+	t_vec		o;
+	int			col;
 
-	start = region[0];
-	size = vsub(region[1], region[0]);
+	o = reg[0];
+	size = vsub(reg[1], reg[0]);
 	new = create_texture(mlx, size.x * scale, size.y * scale);
 	pos.y = 0;
 	while (pos.y < size.y * scale)
@@ -56,7 +57,8 @@ t_texture	copy_texture(void *mlx, t_texture tex, const t_vec region[2], int scal
 		pos.x = 0;
 		while (pos.x < size.x * scale)
 		{
-			pxput(new, pos.x, pos.y, pxget(tex, start.x + pos.x / scale, start.y + pos.y / scale));
+			col = pxget(tex, o.x + pos.x / scale, o.y + pos.y / scale);
+			pxput(new, pos.x, pos.y, col);
 			pos.x++;
 		}
 		pos.y++;

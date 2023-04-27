@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:08:48 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 12:08:16 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/27 16:46:23 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@
 # include "defs.h"
 # include "state.h"
 
-
 struct s_tiletex
 {
-	int subquad;
-	t_texture full;
+	int			subquad;
+	t_texture	full;
 
-	t_texture tl;
-	t_texture tr;
-	t_texture bl;
-	t_texture br;
+	t_texture	tl;
+	t_texture	tr;
+	t_texture	bl;
+	t_texture	br;
 };
 
 struct s_themeinfo

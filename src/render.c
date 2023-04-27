@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:53:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 15:55:01 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/27 16:48:31 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -58,8 +58,8 @@ void	*get_tile_image(t_gamestate *state, int id)
 void	render_map(t_gamestate *gs, t_map *map)
 {
 	void	*image;
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	y = 0;
 	while (y < gs->map->size_y)
@@ -94,17 +94,5 @@ int	on_frame(t_gamestate *gs)
 	render_map(gs, gs->map);
 	mv_process_frame(gs->player, &gs->move);
 	push_sprite(gs, gs->player);
-	
-	while (x < TILE_COUNT)
-	{
-		if (gs->theme->tiletexs[x].subquad)
-		{
-			mlx_put_image_to_window(gs->mlx, gs->win, gs->theme->tiletexs[x].tl.img, 0, x * 96);
-			mlx_put_image_to_window(gs->mlx, gs->win, gs->theme->tiletexs[x].tr.img, 48, x * 96);
-			mlx_put_image_to_window(gs->mlx, gs->win, gs->theme->tiletexs[x].bl.img, 0, x * 96 + 48);
-			mlx_put_image_to_window(gs->mlx, gs->win, gs->theme->tiletexs[x].br.img, 48, x * 96 + 48);
-		}
-		x++;
-	}
 	return (0);
 }

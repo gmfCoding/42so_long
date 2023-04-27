@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 16:32:46 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 15:56:48 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/27 16:05:58 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "theme.h"
@@ -20,7 +20,7 @@ static t_texture	get_subtile_tex(void *mlx, int x, int y, t_texture full)
 
 	region[0] = vnew(x * res, y * res);
 	region[1] = vnew(x * res + res, y * res + res);
-	tex = copy_texture(mlx, full, region, 1);
+	tex = copy_tex(mlx, full, region, 1);
 	return (tex);
 }
 
@@ -30,8 +30,8 @@ static t_tiletex	get_tile_tex(void *mlx, int i, t_texture entire)
 	t_vec		region[2];
 
 	region[0] = vnew(0, i * TILE_RES);
-	region[1] = vnew(TILE_RES, i * TILE_RES + TILE_RES);	
-	tile.full = copy_texture(mlx, entire, region, TILE_PX_SCALE);
+	region[1] = vnew(TILE_RES, i * TILE_RES + TILE_RES);
+	tile.full = copy_tex(mlx, entire, region, TILE_PX_SCALE);
 	tile.tl = get_subtile_tex(mlx, 0, 0, tile.full);
 	tile.tr = get_subtile_tex(mlx, 1, 0, tile.full);
 	tile.bl = get_subtile_tex(mlx, 0, 1, tile.full);

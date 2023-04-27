@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 12:08:34 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/27 16:45:22 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -35,7 +35,7 @@ t_sprite	*create_player(t_gamestate *state)
 	const t_vec	region[] = {vnew(0, 0), vnew(32, 32)};
 
 	img = load_texture(state->mlx, "assets/player96.xpm");
-	tex = copy_texture(state->mlx, img, region, 3);
+	tex = copy_tex(state->mlx, img, region, 3);
 	mlx_destroy_image(state->mlx, img.img);
 	return (instance(tex, vnew(0, 0)));
 }
@@ -51,9 +51,7 @@ int	main(void)
 	state.player = create_player(&state);
 	ft_printf("Welcome to so_long!");
 	setup_state(&state);
-	
 	state.theme = load_theme(&state, "assets/lava_theme.xpm");
-	
 	mlx_loop_hook(state.mlx, on_frame, &state);
 	mlx_do_key_autorepeatoff(state.mlx);
 	mlx_hook(state.win, 2, 1L << 0, on_input_press, (void *)&state);
