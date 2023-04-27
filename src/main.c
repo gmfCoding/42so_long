@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/26 18:51:58 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/27 12:08:34 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -52,7 +52,7 @@ int	main(void)
 	ft_printf("Welcome to so_long!");
 	setup_state(&state);
 	
-	state.theme = loadtheme(state, "assets/lava_theme.xpm");
+	state.theme = load_theme(&state, "assets/lava_theme.xpm");
 	
 	mlx_loop_hook(state.mlx, on_frame, &state);
 	mlx_do_key_autorepeatoff(state.mlx);

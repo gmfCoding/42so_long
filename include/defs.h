@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   defs.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 20:21:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 11:54:10 by clovell          ###   ########.fr       */
+/*   Created: 2023/04/27 11:53:27 by clovell           #+#    #+#             */
+/*   Updated: 2023/04/27 12:06:53 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#ifndef DEFS_H
+# define DEFS_H
 
-# include "defs.h"
-# include "vector.h"
+# define TILE_PLAYER	0
+# define TILE_WALL		1
+# define TILE_FLOOR		2
+# define TILE_EXIT		3
+# define TILE_COLLECT	4
+# define TILE_COUNT 4
 
-typedef struct s_tile
-{
-	int	id;
-	int	collectable;
-}				t_tile;
+# define TILE_RES 32
+# define TILE_PX_SCALE 3
 
-typedef struct s_map
-{
-	int		size_x;
-	int		size_y;
+typedef struct s_themeinfo	t_themeinfo;
+typedef struct s_gamestate	t_gamestate;
+typedef struct s_tiletex	t_tiletex;
 
-	t_vec	start;
-	t_vec	exit;
-
-	t_tile	*tiles;
-}			t_map;
-
-t_tile	new_c_tile(int id, int collectable);
-t_tile	new_tile(int id);
-t_map	*load_map(const char *path);
 #endif
