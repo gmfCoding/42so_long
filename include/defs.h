@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 11:53:27 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 12:06:53 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:59:39 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@
 # define TILE_COLLECT	4
 # define TILE_COUNT 4
 
+# define TTEX_FLOOR 0
+# define TTEX_CORNER 1
+# define TTEX_INVCON 2
+# define TTEX_WALL 3
+
 # define TILE_RES 32
+# define REND_RES 96
 # define TILE_PX_SCALE 3
 
 typedef struct s_themeinfo	t_themeinfo;

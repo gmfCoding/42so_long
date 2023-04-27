@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/25 16:40:09 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:40:49 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lst_extra.h"
@@ -24,6 +24,11 @@ static t_tile	set_tile(char type, int x, int y, t_map *map)
 	else if (type == 'C')
 		return (new_c_tile(TILE_FLOOR, 1));
 	return (new_tile(TILE_FLOOR));
+}
+
+t_tile	get_tile(int x, int y, t_map *map)
+{
+	return map->tiles[map->size_x * y + x];
 }
 
 static void	set_tiles(t_list *lst, t_map *map)
@@ -45,6 +50,16 @@ static void	set_tiles(t_list *lst, t_map *map)
 		lst = lst->next;
 		y++;
 	}
+}
+
+int bounds(t_map *map, int x, int y)
+{
+	int boundx;
+	int boundy;
+
+	boundx = (x >= 0 && x < map->size_x);
+	boundy = (y >= 0 && y < map->size_x);
+	return (boundx && boundy);
 }
 
 t_map	*load_map(const char *path)
