@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 16:45:22 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/28 15:40:03 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -38,6 +38,14 @@ t_sprite	*create_player(t_gamestate *state)
 	tex = copy_tex(state->mlx, img, region, 3);
 	mlx_destroy_image(state->mlx, img.img);
 	return (instance(tex, vnew(0, 0)));
+}
+
+void push_debugtex(t_gamestate *gs, int x, int y)
+{
+	static t_texture tex;
+	if (!tex.img)
+		tex = load_texture(gs, "assets/debug.xpm");
+	mlx_put_image_to_window(gs->mlx, gs->win, tex.img, x, y);	
 }
 
 int	main(void)

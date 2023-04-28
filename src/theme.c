@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 16:32:46 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 16:05:58 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/28 17:29:57 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "theme.h"
@@ -48,7 +48,7 @@ t_themeinfo	*load_theme(t_gamestate *state, const char *themeimg)
 	theme = ft_calloc(1, sizeof(t_themeinfo));
 	theme->entire = load_texture(state->mlx, themeimg);
 	i = 0;
-	while (i < TILE_COUNT)
+	while (i < TTEX_COUNT)
 	{
 		theme->tiletexs[i] = get_tile_tex(state->mlx, i, theme->entire);
 		theme->tiletexs[i].subquad = i <= 2;

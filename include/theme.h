@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:08:48 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 16:46:23 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/28 17:30:16 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ struct s_tiletex
 struct s_themeinfo
 {
 	t_texture	entire;
-	t_tiletex	tiletexs[TILE_COUNT];
+	t_tiletex	tiletexs[TTEX_COUNT];
 };
 
 t_themeinfo	*load_theme(t_gamestate *state, const char *themeimg);

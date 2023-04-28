@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:15:01 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 12:06:11 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/28 17:30:38 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STATE_H
@@ -34,4 +34,5 @@ typedef struct s_gamestate
 	t_pmove		move;
 	t_themeinfo	*theme;
 }			t_gamestate;
+void push_debugtex(t_gamestate *gs, int x, int y);
 #endif
