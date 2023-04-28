@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 19:50:40 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/28 21:20:44 by clovell          ###   ########.fr       */
+/*   Updated: 2023/04/28 21:23:55 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "state.h"
@@ -17,12 +17,12 @@
 #include "map.h"
 #include "render.h"
 
-# define U 0
-# define R 1
-# define D 2
-# define L 3
+#define U 0
+#define R 1
+#define D 2
+#define L 3
 
-static int push_tile(t_gamestate *gs, t_texture tex, t_vec pos, int cond)
+static int	push_tile(t_gamestate *gs, t_texture tex, t_vec pos, int cond)
 {
 	if (cond)
 		push_tex(gs, tex, pos);
@@ -34,7 +34,7 @@ void	get_neighbours(int *f, t_map *map, int x, int y)
 {
 	const t_vec	dir[] = {vnew(0, -1), vnew(1, 0), vnew(0, 1), vnew(-1, 0)};
 	int			d;
-	
+
 	d = 0;
 	while (d < 4)
 	{
@@ -72,17 +72,17 @@ static void	p_invcon(t_gamestate *gs, t_vec q[4], int f[4], t_tiletex *texs)
 	push_tile(gs, texs[TTEX_INVCON].br, q[3], !f[D] && !f[R]);
 }
 
-void push_tilequads(t_gamestate *gs, t_vec pos)
+void	push_tilequads(t_gamestate *gs, t_vec pos)
 {
-	const int res = TILE_RES / 2 * 3; 
-	const t_tiletex *texs = gs->theme->tiletexs;
-	int	f[4];
-	t_vec q[4];
-	
-	q[0] = vadd(vmuls(pos, REND_RES), vnew(0,0));
-	q[1] = vadd(vmuls(pos, REND_RES), vnew(res,0));
-	q[2] = vadd(vmuls(pos, REND_RES), vnew(0,res));
-	q[3] = vadd(vmuls(pos, REND_RES), vnew(res,res));
+	const int		res = TILE_RES / 2 * 3;
+	const t_tiletex	*texs = gs->theme->tiletexs;
+	int				f[4];
+	t_vec			q[4];
+
+	q[0] = vadd(vmuls(pos, REND_RES), vnew(0, 0));
+	q[1] = vadd(vmuls(pos, REND_RES), vnew(res, 0));
+	q[2] = vadd(vmuls(pos, REND_RES), vnew(0, res));
+	q[3] = vadd(vmuls(pos, REND_RES), vnew(res, res));
 	get_neighbours(f, gs->map, pos.x, pos.y);
 	if (get_tile(pos.x, pos.y, gs->map).id == TILE_WALL)
 	{
@@ -91,45 +91,3 @@ void push_tilequads(t_gamestate *gs, t_vec pos)
 	}
 	p_full_con(gs, q, f, texs);
 }
-/////*
-//	if (f[0] && f[3])
-//		push_tex(gs, texs[TTEX_CORNER].tl, vnew(x * REND_RES, y * REND_RES));
-//	else
-//		push_tex(gs, texs[TTEX_FLOOR].tl, vnew(x * REND_RES, y * REND_RES));	
-//	if (f[0] && f[1])
-//		push_tex(gs, texs[TTEX_CORNER].tr, vnew(x * REND_RES + res, y * REND_RES));
-//	else
-//		push_tex(gs, texs[TTEX_FLOOR].tr, vnew(x * REND_RES + res, y * REND_RES));
-//	if (f[2] && f[3])
-//		push_tex(gs, texs[TTEX_CORNER].bl, vnew(x * REND_RES, y * REND_RES + res));
-//	else
-//		push_tex(gs, texs[TTEX_FLOOR].bl, vnew(x * REND_RES, y * REND_RES + res));
-//	if (f[2] && f[1])
-//		push_tex(gs, texs[TTEX_CORNER].br, vnew(x * REND_RES + res, y * REND_RES + res));
-//	else
-//		push_tex(gs, texs[TTEX_FLOOR].br, vnew(x * REND_RES + res, y * REND_RES + res));
-//	}
-//	/*if (!i && !push_tile(gs, texs[tile].tl, pos, !f[U] - i && !f[L]))
-//		push_tile(gs, texs[TTEX_FLOOR].tl, pos, 1);
-//	if (!i && !push_tile(gs, texs[tile].tr, pos, !f[U] - i && !f[R] - i))
-//		push_tile(gs, texs[TTEX_FLOOR].tr, pos, 1);
-//	if (!i && !push_tile(gs, texs[tile].bl, pos, !f[D] - i && !f[L] - i))
-//		push_tile(gs, texs[TTEX_FLOOR].bl, pos, 1);
-//	if (!i && !push_tile(gs, texs[tile].br, pos, !f[D] - i && !f[R] - i))
-//		push_tile(gs, texs[TTEX_FLOOR].br, pos, 1);*/
-//	if (get_tile(x, y, map).id == TILE_WALL)
-//	{
-//
-//		if (!f[0] && !f[3])
-//			push_tex(gs, texs[TTEX_INVCON].tl, vnew(x * REND_RES, y * REND_RES));
-//		if (!f[0] && !f[1])
-//			push_tex(gs, texs[TTEX_INVCON].tr, vnew(x * REND_RES + res, y * REND_RES));
-//		if (!f[2] && !f[3])
-//			push_tex(gs, texs[TTEX_INVCON].bl, vnew(x * REND_RES, y * REND_RES + res));
-//		if (!f[2] && !f[1])
-//			push_tex(gs, texs[TTEX_INVCON].br, vnew(x * REND_RES + res, y * REND_RES + res));
-//		if (x == 0 && y == 4)
-//			push_debugtex(gs, x * REND_RES, y * REND_RES);
-//		return ;
-//	}*/
-//}	
