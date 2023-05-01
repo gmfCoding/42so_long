@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:15:01 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/01 19:28:39 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 07:07:10 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STATE_H
@@ -27,7 +27,8 @@ typedef struct s_gamestate
 	int			w_height;
 
 	void		*tile_images[TILE_COUNT];
-
+	
+	int			collected;
 	t_list		*sprites;	
 	t_map		*map;
 	t_sprite	*player;

@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:05:26 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/01 20:27:52 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 07:26:53 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "state.h"
@@ -29,6 +29,7 @@ int	on_input(int key, t_gamestate *state)
 {
 	t_vec	*pos;
 	t_map	*map;
+	t_vec	new;
 
 	map = state->map;
 	pos = &state->player->pos;
@@ -40,5 +41,11 @@ int	on_input(int key, t_gamestate *state)
 		pos->y += REND_RES;
 	if (key == KEY_D && can_move(*pos, vnew(1, 0), map))
 		pos->x += REND_RES;
+	new = vmuls(*pos, 1.0f / REND_RES);
+	if (get_tile(new.x, new.y, map).collectable > 0)
+	{	
+		state->collected++;
+		get_tile_ptr(new.x, new.y, map)->collectable = 0;
+	}
 	return (0);
 }

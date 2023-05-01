@@ -6,24 +6,16 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/01 20:33:23 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 07:20:44 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lst_extra.h"
 #include "libft.h"
 #include "map.h"
 
-static t_tile	set_tile(char type, int x, int y, t_map *map)
+t_tile	*get_tile_ptr(int x, int y, t_map *map)
 {
-	if (type == 'P')
-		map->start = vnew((t_vecd)x, (t_vecd)y);
-	else if (type == 'E')
-		map->exit = vnew((t_vecd)x, (t_vecd)y);
-	else if (type == '1')
-		return (new_tile(TILE_WALL));
-	else if (type == 'C')
-		return (new_c_tile(TILE_FLOOR, 1));
-	return (new_tile(TILE_FLOOR));
+	return &(map->tiles[map->size_x * y + x]);
 }
 
 t_tile	get_tile(int x, int y, t_map *map)
@@ -36,6 +28,7 @@ static void	set_tiles(t_list *lst, t_map *map)
 	int		x;
 	int		y;
 	t_tile	tile;
+	char	type;
 
 	y = 0;
 	while (lst->content)
@@ -43,7 +36,16 @@ static void	set_tiles(t_list *lst, t_map *map)
 		x = 0;
 		while (((char *)(lst->content))[x])
 		{
-			tile = set_tile(((char *)lst->content)[x], x, y, map);
+			type = ((char *)lst->content)[x];
+			tile = (new_tile(TILE_FLOOR));
+			if (type == 'P')
+				map->start = vnew((t_vecd)x, (t_vecd)y);
+			else if (type == 'E')
+				map->exit = vnew((t_vecd)x, (t_vecd)y);
+			else if (type == '1')
+				tile = (new_tile(TILE_WALL));
+			else if (type == 'C')
+				tile = (new_c_tile(TILE_FLOOR, 1));
 			map->tiles[y * map->size_x + x] = tile;
 			x++;
 		}
