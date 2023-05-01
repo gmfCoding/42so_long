@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:48:44 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 16:48:52 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/01 19:40:53 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,13 @@ void	draw_theme(t_gamestate *gs)
 		}
 		x++;
 	}
+}
+
+void	push_debugtex(t_gamestate *gs, int x, int y)
+{
+	static t_texture	tex;
+
+	if (!tex.img)
+		tex = load_texture(gs, "assets/debug.xpm");
+	mlx_put_image_to_window(gs->mlx, gs->win, tex.img, x, y);
 }
