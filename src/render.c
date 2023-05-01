@@ -6,17 +6,16 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:53:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/02 07:27:24 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 08:19:20 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
-#include "movement.h"
-#include "vector.h"
 #include "state.h"
 #include "texture.h"
 #include "libft.h"
 #include "ft_printf.h"
 #include "render.h"
+#include "vectormath.h"
 
 /* Sets an array of neighbours to be 1 if that neighbours is a wall */
 static void	get_neighbours(int *f, t_map *map, int x, int y)
@@ -63,23 +62,19 @@ void	render_map(t_gamestate *gs, t_map *map)
 	}
 }
 
+static void	draw_other(t_gamestate *gs)
+{
+	t_tiletex	*texs;
+
+	texs = gs->theme->tiletexs;
+	push_tex(gs, texs[TTEX_EXIT].full, vmuls(gs->map->exit, REND_RES));
+	push_tex(gs, texs[TTEX_PLAYER].full, vmuls(gs->pos, REND_RES));
+}
+
 int	on_frame(t_gamestate *gs)
 {
-	t_list	*sp_next;
-	int		x;
-	int		y;
-	void	*image;
-
 	mlx_clear_window(gs->mlx, gs->win);
-	sp_next = gs->sprites;
-	x = 0;
-	while (sp_next && sp_next->next)
-	{
-		push_sprite(gs, sp_next->content);
-		sp_next = sp_next->next;
-	}
-	y = 0;
 	render_map(gs, gs->map);
-	push_sprite(gs, gs->player);
+	draw_other(gs);
 	return (0);
 }

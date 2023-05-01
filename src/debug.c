@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:48:44 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/01 19:52:16 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 07:51:25 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -22,7 +22,7 @@ void	draw_theme(t_gamestate *gs)
 	mlx = gs->mlx;
 	win = gs->win;
 	i = 0;
-	while (i < TILE_COUNT)
+	while (i < TTEX_COUNT)
 	{
 		if (gs->theme->tiletexs[i].subquad)
 		{
@@ -32,6 +32,8 @@ void	draw_theme(t_gamestate *gs)
 			mlx_put_image_to_window(mlx, win, tile.bl.img, 0, i * 96 + 48);
 			mlx_put_image_to_window(mlx, win, tile.br.img, 48, i * 96 + 48);
 		}
+		else
+			mlx_put_image_to_window(mlx, win, tile.full.img, 0, i * 96);
 		i++;
 	}
 }

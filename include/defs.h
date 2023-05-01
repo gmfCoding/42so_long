@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 11:53:27 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/01 23:06:17 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 07:47:11 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 # define TTEX_INVCON 2
 # define TTEX_WALL 3
 # define TTEX_COLL 4
-# define TTEX_COUNT 5
+# define TTEX_EXIT 5
+# define TTEX_PLAYER 6
+# define TTEX_COUNT 7
 
 # define TILE_RES 32
 # define REND_RES 96

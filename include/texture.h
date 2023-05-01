@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:13:28 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 16:47:49 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 08:16:47 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,6 @@ typedef struct s_texture
 	int		line_size;
 	int		endian;
 }				t_texture;
-
-typedef struct s_sprite
-{
-	t_texture	tex;
-	t_vec		pos;
-}				t_sprite;
-
-t_sprite	*instance(t_texture tex, t_vec pos);
 
 t_texture	create_texture(void *mlx, int width, int height);
 
