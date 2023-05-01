@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:18:00 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/25 17:19:53 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/01 19:46:03 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef INPUT_H
@@ -129,6 +129,5 @@
 
 # include "state.h"
 
-int	on_input_press(int key, t_gamestate *state);
-int	on_input_release(int key, t_gamestate *state);
+int	on_input(int key, t_gamestate *state);
 #endif 

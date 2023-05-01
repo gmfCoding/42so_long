@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:53:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/01 16:09:13 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/01 19:52:34 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -80,7 +80,6 @@ int	on_frame(t_gamestate *gs)
 	}
 	y = 0;
 	render_map(gs, gs->map);
-	mv_process_frame(gs->player, &gs->move);
 	push_sprite(gs, gs->player);
 	return (0);
 }
