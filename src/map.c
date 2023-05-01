@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/01 16:09:45 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/01 20:33:23 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lst_extra.h"
@@ -19,7 +19,7 @@ static t_tile	set_tile(char type, int x, int y, t_map *map)
 		map->start = vnew((t_vecd)x, (t_vecd)y);
 	else if (type == 'E')
 		map->exit = vnew((t_vecd)x, (t_vecd)y);
-	else if (type == '#')
+	else if (type == '1')
 		return (new_tile(TILE_WALL));
 	else if (type == 'C')
 		return (new_c_tile(TILE_FLOOR, 1));
