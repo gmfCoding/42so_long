@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:53:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/28 21:26:20 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/01 15:37:06 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -37,6 +37,8 @@ static void	get_neighbours(int *f, t_map *map, int x, int y)
 
 void	render_tile(t_gamestate *gs, t_map *map, int x, int y)
 {
+	const t_tiletex *texs = (const t_tiletex*) &gs->theme->tiletexs;
+	
 	push_tex(gs, texs[TTEX_WALL].full, vnew(x * REND_RES, y * REND_RES));
 	push_tilequads(gs, vnew(x, y));
 }

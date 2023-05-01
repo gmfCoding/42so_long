@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 19:50:40 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/28 21:23:55 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/01 16:07:11 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "state.h"
@@ -39,7 +39,7 @@ void	get_neighbours(int *f, t_map *map, int x, int y)
 	while (d < 4)
 	{
 		if (!bounds(map, x + dir[d].x, y + dir[d].y))
-			f[d] = 0;
+			f[d] = TILE_FLOOR;
 		else
 			f[d] = get_tile(x + dir[d].x, y + dir[d].y, map).id == TILE_WALL;
 		d++;

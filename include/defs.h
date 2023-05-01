@@ -6,15 +6,15 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 11:53:27 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/28 17:29:47 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/01 15:56:46 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFS_H
 # define DEFS_H
 
-# define TILE_WALL	1
-# define TILE_FLOOR	2
+# define TILE_WALL	0
+# define TILE_FLOOR	1
 # define TILE_COUNT 2
 
 # define TTEX_FLOOR 0
