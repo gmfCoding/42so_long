@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:08:48 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/02 08:15:11 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 10:43:02 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ struct s_themeinfo
 	t_tiletex	tiletexs[TTEX_COUNT];
 };
 
-t_themeinfo	*load_theme(t_gamestate *state, const char *themeimg);
+t_themeinfo	*load_theme(t_gamestate *state, char *themeimg);
 #endif

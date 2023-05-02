@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 16:32:46 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/28 17:29:57 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 10:42:53 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "theme.h"
@@ -39,7 +39,7 @@ static t_tiletex	get_tile_tex(void *mlx, int i, t_texture entire)
 	return (tile);
 }
 
-t_themeinfo	*load_theme(t_gamestate *state, const char *themeimg)
+t_themeinfo	*load_theme(t_gamestate *state, char *themeimg)
 {
 	t_themeinfo	*theme;
 	int			i;

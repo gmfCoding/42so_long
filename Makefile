@@ -36,8 +36,13 @@ LIB-L = $(patsubst %,-L$(DIRLIB)%, $(dir $(LIBSF)))
 NAME = program
 CC = cc
 
-OFLAGS = $(DFLAGS) $(LIB-I) -I$(DIRINC)
-CFLAGS = $(DFLAGS) $(LIB-L) $(LIB-l) -lz -lm 
+OFLAGS = $(DFLAGS)  $(LIB-I) -I$(DIRINC)
+CFLAGS = $(DFLAGS)  $(LIB-L) $(LIB-l) -lz -lm 
+
+ifeq ($(DEBUG),1)
+OFLAGS += -g -fsanitize=address
+CFLAGS += -g -fsanitize=address
+endif
 
 ifneq ($(OS),Linux) 
 CFLAGS += -framework OpenGL -framework AppKit 

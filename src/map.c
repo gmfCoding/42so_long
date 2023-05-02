@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/02 07:20:44 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 10:41:49 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lst_extra.h"
@@ -38,6 +38,8 @@ static void	set_tiles(t_list *lst, t_map *map)
 		{
 			type = ((char *)lst->content)[x];
 			tile = (new_tile(TILE_FLOOR));
+			if (type == '\n')
+				break ;
 			if (type == 'P')
 				map->start = vnew((t_vecd)x, (t_vecd)y);
 			else if (type == 'E')
@@ -60,7 +62,7 @@ int	bounds(t_map *map, int x, int y)
 	int	boundy;
 
 	boundx = (x >= 0 && x < map->size_x);
-	boundy = (y >= 0 && y < map->size_x);
+	boundy = (y >= 0 && y < map->size_y);
 	return (boundx && boundy);
 }
 

@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/02 08:17:52 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 10:41:35 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -34,12 +34,10 @@ int	main(void)
 {
 	static t_gamestate	state;
 
-	state.logfile = open("output.log", O_WRONLY);
 	state.mlx = mlx_init();
 	state.win = mlx_new_window(state.mlx, 1920, 1080, "Hello world!");
 	ft_printf("Welcome to so_long!");
 	setup_state(&state);
-	printf("start:%f %f\n", state.map->start.x, state.map->start.y);
 	mlx_loop_hook(state.mlx, on_frame, &state);
 	mlx_hook(state.win, 2, 1L << 0, on_input, (void *)&state);
 	mlx_hook(state.win, 17, 0, end_program, &state);

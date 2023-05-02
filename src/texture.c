@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 16:11:47 by clovell           #+#    #+#             */
-/*   Updated: 2023/04/27 16:38:21 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 10:42:18 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "texture.h"
@@ -66,7 +66,7 @@ t_texture	copy_tex(void *mlx, t_texture tex, const t_vec reg[2], int scale)
 	return (new);
 }
 
-t_texture	load_texture(void *mlx, const char *path)
+t_texture	load_texture(void *mlx, char *path)
 {
 	t_texture	t;
 
