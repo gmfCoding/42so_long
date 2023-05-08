@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 20:21:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/02 07:17:46 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/08 22:57:38 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,16 @@
 # include "defs.h"
 # include "vector.h"
 
+# define TPROP_NONE 0
+# define TPROP_POS 1 
+# define TPROP_EXIT 2
+# define TPROP_COLLECT 3
+
 typedef struct s_tile
 {
 	int	id;
 	int	collectable;
+	int	property;
 }				t_tile;
 
 typedef struct s_map
@@ -33,11 +39,22 @@ typedef struct s_map
 	t_tile	*tiles;
 }			t_map;
 
-int		bounds(t_map *map, int x, int y);
-void	*get_tile_image(t_gamestate *state, int id);
-t_tile	get_tile(int x, int y, t_map *map);
+/* map.c */
 t_tile	*get_tile_ptr(int x, int y, t_map *map);
+t_tile	get_tile(int x, int y, t_map *map);
+t_map	*load_map(const char *path);
+
+/* tile.c */
 t_tile	new_c_tile(int id, int collectable);
 t_tile	new_tile(int id);
-t_map	*load_map(const char *path);
+t_tile	new_e_tile(int floor);
+t_tile	new_s_tile(int floor);
+
+/* map_verify.c */
+int		verify_contains(t_map *map);
+int		verify_boundary(t_map *map);
+int		bounds(t_map *map, int x, int y);
+
+/* map_verify_fill.c */
+int		map_completeable(t_map *map);
 #endif

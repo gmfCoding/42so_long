@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 19:50:40 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/01 23:12:42 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/08 22:25:38 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "state.h"
@@ -78,7 +78,7 @@ void	push_tile(t_gamestate *gs, t_vec pos)
 	const t_tiletex	*texs = gs->theme->tiletexs;
 	int				f[4];
 	t_vec			q[4];
-	t_tile tile;
+	t_tile			tile;
 
 	tile = get_tile(pos.x, pos.y, gs->map);
 	q[0] = vadd(vmuls(pos, REND_RES), vnew(0, 0));
@@ -91,9 +91,7 @@ void	push_tile(t_gamestate *gs, t_vec pos)
 		p_invcon(gs, q, f, (t_tiletex *)texs);
 		return ;
 	}
-	
 	p_full_con(gs, q, f, (t_tiletex *)texs);
 	if (tile.collectable)
 		push_tex(gs, texs[TTEX_COLL].full, q[0]);
-
 }

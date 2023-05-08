@@ -6,21 +6,33 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/02 10:41:49 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/08 23:11:16 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lst_extra.h"
 #include "libft.h"
 #include "map.h"
+#include "vector.h"
 
-t_tile	*get_tile_ptr(int x, int y, t_map *map)
+static t_tile	make_tile(char type, int x, int y, t_map *map)
 {
-	return &(map->tiles[map->size_x * y + x]);
-}
-
-t_tile	get_tile(int x, int y, t_map *map)
-{
-	return (map->tiles[map->size_x * y + x]);
+	t_tile def;
+	def = (new_tile(TILE_FLOOR));
+	if (type == 'P')
+	{
+		map->start = vnew(x, y);
+		def = (new_s_tile(TILE_FLOOR));
+	}
+	else if (type == 'E')
+	{
+		map->exit = vnew(x, y);
+		def = (new_e_tile(TILE_FLOOR));
+	}
+	else if (type == '1')
+		def = (new_tile(TILE_WALL));
+	else if (type == 'C')
+		def = (new_c_tile(TILE_FLOOR, 1));
+	return (def);
 }
 
 static void	set_tiles(t_list *lst, t_map *map)
@@ -37,17 +49,9 @@ static void	set_tiles(t_list *lst, t_map *map)
 		while (((char *)(lst->content))[x])
 		{
 			type = ((char *)lst->content)[x];
-			tile = (new_tile(TILE_FLOOR));
 			if (type == '\n')
 				break ;
-			if (type == 'P')
-				map->start = vnew((t_vecd)x, (t_vecd)y);
-			else if (type == 'E')
-				map->exit = vnew((t_vecd)x, (t_vecd)y);
-			else if (type == '1')
-				tile = (new_tile(TILE_WALL));
-			else if (type == 'C')
-				tile = (new_c_tile(TILE_FLOOR, 1));
+			tile = make_tile(type, x, y, map);
 			map->tiles[y * map->size_x + x] = tile;
 			x++;
 		}
@@ -56,14 +60,14 @@ static void	set_tiles(t_list *lst, t_map *map)
 	}
 }
 
-int	bounds(t_map *map, int x, int y)
+t_tile	*get_tile_ptr(int x, int y, t_map *map)
 {
-	int	boundx;
-	int	boundy;
+	return (&(map->tiles[map->size_x * y + x]));
+}
 
-	boundx = (x >= 0 && x < map->size_x);
-	boundy = (y >= 0 && y < map->size_y);
-	return (boundx && boundy);
+t_tile	get_tile(int x, int y, t_map *map)
+{
+	return (map->tiles[map->size_x * y + x]);
 }
 
 t_map	*load_map(const char *path)

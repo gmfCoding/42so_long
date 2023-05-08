@@ -1,5 +1,5 @@
 SRCSF =	main.c lst_readfile.c map.c vector.c vector_math.c tile.c render.c \
-		texture.c theme.c input.c vector_math_extra.c  \
+		texture.c theme.c input.c vector_math_extra.c map_verify.c map_verify_fill.c \
 		render_util.c rules.c debug.c
 
 OBJSF = $(patsubst %.c,%.o, $(SRCSF))
