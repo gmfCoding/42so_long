@@ -55,7 +55,7 @@ endif
 all: $(NAME)
 
 # OBJ TO PROJECT
-$(NAME): $(OBJS) $(LIBS)
+$(NAME): $(LIBS) $(OBJS)
 	@$(CC) $(OBJS) $(CFLAGS) -o $@
 
 # SOURCE TO OBJ

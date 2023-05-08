@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/02 10:41:35 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/02 11:01:14 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -19,7 +19,6 @@
 #include "render.h"
 #include "ft_printf.h"
 #include "input.h"
-#include <stdio.h>
 #include "vectormath.h"
 
 void	setup_state(t_gamestate *state);
