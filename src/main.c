@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/08 23:06:42 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/08 23:21:01 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -54,7 +54,7 @@ void	setup_world(t_gamestate *state)
 	state->map = map;
 	error = verify_contains(map);
 	error |= verify_boundary(map);
-	error |= map_completeable(map) * 16;
+	error |= map_completeable(map) == 0 * 16;
 	if (error)
 	{
 		ft_printf("Encountered error while verifying map: %u\n", error);

@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 22:40:20 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/08 23:01:17 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/08 23:20:47 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "map.h"
@@ -43,17 +43,18 @@ static int	find_end(int x, int y, char *tiles, t_map *map)
 
 int	map_completeable(t_map *map)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
 	char	*tiles;
 	char	*tile;
+	int		error;
 
 	tiles = malloc (map->size_x * map->size_y * sizeof(char));
 	y = 0;
 	while (y < map->size_y)
 	{
 		x = 0;
-		while ((y == 0 || y == map->size_y - 1) && x < map->size_x)
+		while (x < map->size_x)
 		{
 			tile = tiles_get(x, y, tiles, map);
 			*tile = get_tile(x, y, map).id == TILE_WALL;
@@ -61,5 +62,8 @@ int	map_completeable(t_map *map)
 		}
 		y++;
 	}
-	return (find_end(map->start.x, map->start.y, tiles, map));
+	
+	error = find_end(map->start.x, map->start.y, tiles, map);
+	free(tiles);
+	return (error);
 }
