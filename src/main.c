@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/08 23:21:01 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/10 13:58:04 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -25,6 +25,7 @@ void	setup_state(t_gamestate *state);
 
 int	end_program(t_gamestate *state)
 {
+	mlx_destroy_window(state->mlx, state->win);	
 	ft_printf("So long! Bye!");
 	exit(0);
 }
@@ -34,8 +35,8 @@ int	main(void)
 	static t_gamestate	state;
 
 	state.mlx = mlx_init();
-	state.win = mlx_new_window(state.mlx, 1920, 1080, "Hello world!");
-	ft_printf("Welcome to so_long!");
+	state.win = mlx_new_window(state.mlx, 1920, 1080, "SO_LONG");
+	ft_printf("Welcome to so_long!\n");
 	setup_state(&state);
 	mlx_loop_hook(state.mlx, on_frame, &state);
 	mlx_hook(state.win, 2, 1L << 0, on_input, (void *)&state);

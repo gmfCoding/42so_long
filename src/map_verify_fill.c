@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 22:40:20 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/08 23:20:47 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/10 13:59:33 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "map.h"
@@ -49,7 +49,7 @@ int	map_completeable(t_map *map)
 	char	*tile;
 	int		error;
 
-	tiles = malloc (map->size_x * map->size_y * sizeof(char));
+	tiles = malloc(map->size_x * map->size_y * sizeof(char));
 	y = 0;
 	while (y < map->size_y)
 	{
