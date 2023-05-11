@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:05:26 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/10 13:35:56 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:12:57 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "state.h"
@@ -24,7 +24,7 @@ static int	can_move(t_vec pos, t_vec dir, t_map *map)
 	return (oob && get_tile(new.x, new.y, map).id == TILE_FLOOR);
 }
 
-static void count_move(t_gamestate *state, float *mode, float direction)
+static void	count_move(t_gamestate *state, float *mode, float direction)
 {
 	*mode += direction;
 	state->moves++;

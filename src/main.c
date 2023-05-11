@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 13:10:24 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:14:46 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -26,7 +26,7 @@ void	setup_state(t_gamestate *state);
 
 int	end_program(t_gamestate *state)
 {
-	mlx_destroy_window(state->mlx, state->win);	
+	mlx_destroy_window(state->mlx, state->win);
 	ft_printf("So long! Bye!");
 	exit(0);
 }
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 		/* PLEASE EXIT INSTEAD OF DEFAULT MAP PATH*/
 	}
 	else
-		state.map_path = argv[1]; 
+		state.map_path = argv[1];
 	setup_state(&state);
 	mlx_loop_hook(state.mlx, on_frame, &state);
 	mlx_hook(state.win, 2, 1L << 0, on_input, (void *)&state);
@@ -54,7 +54,7 @@ void	setup_window(t_gamestate *state)
 {
 	int	width;
 	int	height;
-	
+
 	width = state->map->size_x * REND_RES;
 	height = state->map->size_y * REND_RES;
 	state->w_width = width;

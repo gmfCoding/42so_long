@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 22:40:20 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/10 13:59:33 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:16:32 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "map.h"
@@ -14,7 +14,7 @@
 
 static char	*tiles_get(int x, int y, char *tiles, t_map *map)
 {
-	return &tiles[y * map->size_x + x];
+	return (&tiles[y * map->size_x + x]);
 }
 
 /*	basic recursive flood fill
@@ -38,7 +38,7 @@ static int	find_end(int x, int y, char *tiles, t_map *map)
 		return (1);
 	if (find_end(x - 1, y, tiles, map))
 		return (1);
-	return (0);	
+	return (0);
 }
 
 int	map_completeable(t_map *map)
@@ -62,7 +62,6 @@ int	map_completeable(t_map *map)
 		}
 		y++;
 	}
-	
 	error = find_end(map->start.x, map->start.y, tiles, map);
 	free(tiles);
 	return (error);

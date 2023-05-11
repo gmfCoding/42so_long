@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/08 23:11:16 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:15:09 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lst_extra.h"
@@ -16,7 +16,8 @@
 
 static t_tile	make_tile(char type, int x, int y, t_map *map)
 {
-	t_tile def;
+	t_tile	def;
+
 	def = (new_tile(TILE_FLOOR));
 	if (type == 'P')
 	{

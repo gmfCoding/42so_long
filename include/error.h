@@ -6,12 +6,12 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:21:28 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 12:22:55 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:12:18 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_ERROR_H
-# define SO_ERROR_H
+#ifndef ERROR_H
+# define ERROR_H
 
 typedef enum e_error
 {

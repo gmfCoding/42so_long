@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 21:48:58 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 13:08:50 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:15:27 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -15,7 +15,6 @@
 #define C_EXIT 0
 #define C_COLL 1
 #define C_POS 2
-
 
 static void	count_prop(int tprop, int prop, int *dst)
 {
