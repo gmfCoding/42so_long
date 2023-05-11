@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 14:13:43 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 14:31:01 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -22,6 +22,7 @@
 #include "input.h"
 #include "vectormath.h"
 #include "error.h"
+#include "game.h"
 
 void	setup_state(t_gamestate *state);
 
@@ -79,10 +80,12 @@ void	setup_world(t_gamestate *state)
 		print_errors(error);
 		exit(1);
 	}
+	state->tile_event = &on_tile;
 }
 
 void	setup_state(t_gamestate *state)
 {
+	state->quit_event = &end_program;
 	setup_world(state);
 	setup_window(state);
 	state->theme = load_theme(state, "assets/lava_theme.xpm");

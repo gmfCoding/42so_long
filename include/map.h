@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 20:21:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 13:09:11 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 14:16:06 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_map
 {
 	int		size_x;
 	int		size_y;
+	int		collectables;
 
 	t_vec	start;
 	t_vec	exit;

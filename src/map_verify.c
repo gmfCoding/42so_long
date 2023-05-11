@@ -6,15 +6,14 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 21:48:58 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 13:15:27 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 14:46:34 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 #include "map.h"
 
 #define C_EXIT 0
-#define C_COLL 1
-#define C_POS 2
+#define C_POS 1
 
 static void	count_prop(int tprop, int prop, int *dst)
 {
@@ -26,7 +25,7 @@ t_error	verify_contains(t_map *map)
 {
 	int	y;
 	int	x;
-	int	counted[3];
+	int	counted[2];
 	int	properror;
 
 	ft_memset(counted, 0, sizeof(int) * 3);
@@ -38,7 +37,7 @@ t_error	verify_contains(t_map *map)
 		{
 			properror = get_tile(x, y, map).property;
 			count_prop(properror, TPROP_POS, &counted[C_POS]);
-			count_prop(properror, TPROP_COLLECT, &counted[C_COLL]);
+			count_prop(properror, TPROP_COLLECT, &map->collectables);
 			count_prop(properror, TPROP_EXIT, &counted[C_EXIT]);
 			x++;
 		}
@@ -47,7 +46,7 @@ t_error	verify_contains(t_map *map)
 	properror = E_NONE;
 	properror |= (counted[C_EXIT] != 1) * E_EXIT;
 	properror |= (counted[C_POS] != 1) * E_POS;
-	properror |= (counted[C_COLL] <= 0) * E_COLL;
+	properror |= (map->collectables <= 0) * E_COLL;
 	return (properror);
 }
 
