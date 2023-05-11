@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 13:14:46 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 14:13:43 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -21,6 +21,7 @@
 #include "ft_printf.h"
 #include "input.h"
 #include "vectormath.h"
+#include "error.h"
 
 void	setup_state(t_gamestate *state);
 
@@ -65,7 +66,7 @@ void	setup_window(t_gamestate *state)
 
 void	setup_world(t_gamestate *state)
 {
-	int		error;
+	t_error	error;
 	t_map	*map;
 
 	map = load_map(state->map_path);
@@ -75,7 +76,7 @@ void	setup_world(t_gamestate *state)
 	error |= map_completeable(map) == 0 * E_PATH;
 	if (error)
 	{
-		ft_printf("Encountered error while verifying map: %u\n", error);
+		print_errors(error);
 		exit(1);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 22:40:20 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 13:16:32 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:39:03 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "map.h"
@@ -18,7 +18,7 @@ static char	*tiles_get(int x, int y, char *tiles, t_map *map)
 }
 
 /*	basic recursive flood fill
-	if we aren't out of bounds or a wall tile, then:
+	if we aren't out of bounds or on a wall tile, then:
 	turn into a wall tile, checking same tile twice, causing infinite recurse,
 	check if we are at the end tile
 	repeat on neighbours
