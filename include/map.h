@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 20:21:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/08 22:57:38 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:09:11 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 
 # include "defs.h"
 # include "vector.h"
+# include "error.h"
 
-# define TPROP_NONE 0
-# define TPROP_POS 1 
-# define TPROP_EXIT 2
-# define TPROP_COLLECT 3
+typedef enum e_prop
+{
+	TPROP_NONE = 0,
+	TPROP_POS = 1,
+	TPROP_EXIT = 2,
+	TPROP_COLLECT = 3
+}			t_prop;
 
 typedef struct s_tile
 {
@@ -51,8 +55,8 @@ t_tile	new_e_tile(int floor);
 t_tile	new_s_tile(int floor);
 
 /* map_verify.c */
-int		verify_contains(t_map *map);
-int		verify_boundary(t_map *map);
+t_error	verify_contains(t_map *map);
+t_error	verify_boundary(t_map *map);
 int		bounds(t_map *map, int x, int y);
 
 /* map_verify_fill.c */

@@ -6,13 +6,14 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 11:24:05 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:10:24 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
 #include <stdlib.h>
 #include <fcntl.h>
 
+#include "defs.h"
 #include "theme.h"
 #include "map.h"
 #include "state.h"
@@ -34,8 +35,6 @@ int	main(int argc, char **argv)
 {
 	static t_gamestate	state;
 
-	state.mlx = mlx_init();
-	state.win = mlx_new_window(state.mlx, 1920, 1080, "SO_LONG");
 	if (argc <= 1)
 	{
 		ft_printf("No map specified, please specify a map as an arg!");
@@ -51,18 +50,29 @@ int	main(int argc, char **argv)
 	mlx_loop(state.mlx);
 }
 
+void	setup_window(t_gamestate *state)
+{
+	int	width;
+	int	height;
+	
+	width = state->map->size_x * REND_RES;
+	height = state->map->size_y * REND_RES;
+	state->w_width = width;
+	state->w_height = height;
+	state->mlx = mlx_init();
+	state->win = mlx_new_window(state->mlx, width, height, "SO_LONG");
+}
+
 void	setup_world(t_gamestate *state)
 {
-	int		x;
-	int		y;
-	t_map	*map;
 	int		error;
+	t_map	*map;
 
 	map = load_map(state->map_path);
 	state->map = map;
 	error = verify_contains(map);
 	error |= verify_boundary(map);
-	error |= map_completeable(map) == 0 * 16;
+	error |= map_completeable(map) == 0 * E_PATH;
 	if (error)
 	{
 		ft_printf("Encountered error while verifying map: %u\n", error);
@@ -73,6 +83,7 @@ void	setup_world(t_gamestate *state)
 void	setup_state(t_gamestate *state)
 {
 	setup_world(state);
+	setup_window(state);
 	state->theme = load_theme(state, "assets/lava_theme.xpm");
 	state->pos = state->map->start;
 }

@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 21:48:58 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/08 23:06:14 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:08:50 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -16,11 +16,6 @@
 #define C_COLL 1
 #define C_POS 2
 
-#define ERR_NONE 0
-#define ERR_EXIT 1
-#define ERR_COLL 2
-#define ERR_POS 4
-#define ERR_BOUND 8
 
 static void	count_prop(int tprop, int prop, int *dst)
 {
@@ -28,7 +23,7 @@ static void	count_prop(int tprop, int prop, int *dst)
 		(*dst)++;
 }
 
-int	verify_contains(t_map *map)
+t_error	verify_contains(t_map *map)
 {
 	int	y;
 	int	x;
@@ -50,14 +45,14 @@ int	verify_contains(t_map *map)
 		}
 		y++;
 	}
-	properror = ERR_NONE;
-	properror |= (counted[C_EXIT] != 1) * ERR_EXIT;
-	properror |= (counted[C_POS] != 1) * ERR_POS;
-	properror |= (counted[C_COLL] <= 0) * ERR_COLL;
+	properror = E_NONE;
+	properror |= (counted[C_EXIT] != 1) * E_EXIT;
+	properror |= (counted[C_POS] != 1) * E_POS;
+	properror |= (counted[C_COLL] <= 0) * E_COLL;
 	return (properror);
 }
 
-int	verify_boundary(t_map *map)
+t_error	verify_boundary(t_map *map)
 {
 	int	y;
 	int	x;
@@ -70,12 +65,12 @@ int	verify_boundary(t_map *map)
 		{
 			if ((x == 0 || x == map->size_x - 1))
 				if (get_tile(x, y, map).id != TILE_WALL)
-					return (ERR_BOUND);
+					return (E_BOUND);
 			x++;
 		}
 		y++;
 	}
-	return (ERR_NONE);
+	return (E_NONE);
 }
 
 int	bounds(t_map *map, int x, int y)
