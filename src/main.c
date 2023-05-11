@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/10 13:58:04 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 11:24:05 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -30,13 +30,20 @@ int	end_program(t_gamestate *state)
 	exit(0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	static t_gamestate	state;
 
 	state.mlx = mlx_init();
 	state.win = mlx_new_window(state.mlx, 1920, 1080, "SO_LONG");
-	ft_printf("Welcome to so_long!\n");
+	if (argc <= 1)
+	{
+		ft_printf("No map specified, please specify a map as an arg!");
+		state.map_path = "assets/example.ber";
+		/* PLEASE EXIT INSTEAD OF DEFAULT MAP PATH*/
+	}
+	else
+		state.map_path = argv[1]; 
 	setup_state(&state);
 	mlx_loop_hook(state.mlx, on_frame, &state);
 	mlx_hook(state.win, 2, 1L << 0, on_input, (void *)&state);
@@ -51,7 +58,7 @@ void	setup_world(t_gamestate *state)
 	t_map	*map;
 	int		error;
 
-	map = load_map("assets/example.ber");
+	map = load_map(state->map_path);
 	state->map = map;
 	error = verify_contains(map);
 	error |= verify_boundary(map);
