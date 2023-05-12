@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 21:48:58 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 14:46:34 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/11 14:56:42 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -28,7 +28,7 @@ t_error	verify_contains(t_map *map)
 	int	counted[2];
 	int	properror;
 
-	ft_memset(counted, 0, sizeof(int) * 3);
+	ft_memset(counted, 0, sizeof(int) * 2);
 	y = 0;
 	while (y < map->size_y)
 	{
