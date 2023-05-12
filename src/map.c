@@ -6,13 +6,14 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 13:15:09 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/12 20:25:56 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lst_extra.h"
 #include "libft.h"
 #include "map.h"
 #include "vector.h"
+#include <stdlib.h>
 
 static t_tile	make_tile(char type, int x, int y, t_map *map)
 {
@@ -81,9 +82,10 @@ t_map	*load_map(const char *path)
 		return (NULL);
 	lst = ft_lst_readfile(path);
 	map->size_y = (int)lst->content;
-	lst = lst->next;
-	map->size_x = ft_strlen(lst->next->content) - 1;
+	map->size_x = ft_strlen(lst->next->next->content) - 1;
 	map->tiles = ft_calloc(map->size_x * map->size_y, sizeof(t_tile));
-	set_tiles(lst, map);
+	set_tiles(lst->next, map);
+	ft_lstclear(&lst->next, free);
+	free(lst);
 	return (map);
 }
