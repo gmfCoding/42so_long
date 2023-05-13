@@ -32,10 +32,13 @@ static t_tiletex	get_tile_tex(void *mlx, int i, t_texture entire)
 	region[0] = vnew(0, i * TILE_RES);
 	region[1] = vnew(TILE_RES, i * TILE_RES + TILE_RES);
 	tile.full = copy_tex(mlx, entire, region, TILE_PX_SCALE);
-	tile.tl = get_subtile_tex(mlx, 0, 0, tile.full);
-	tile.tr = get_subtile_tex(mlx, 1, 0, tile.full);
-	tile.bl = get_subtile_tex(mlx, 0, 1, tile.full);
-	tile.br = get_subtile_tex(mlx, 1, 1, tile.full);
+	if (i < TTEX_TEX_SUB)
+	{
+		tile.tl = get_subtile_tex(mlx, 0, 0, tile.full);
+		tile.tr = get_subtile_tex(mlx, 1, 0, tile.full);
+		tile.bl = get_subtile_tex(mlx, 0, 1, tile.full);
+		tile.br = get_subtile_tex(mlx, 1, 1, tile.full);
+	}
 	return (tile);
 }
 
@@ -51,8 +54,9 @@ t_themeinfo	*load_theme(t_gamestate *state, char *themeimg)
 	while (i < TTEX_COUNT)
 	{
 		theme->tiletexs[i] = get_tile_tex(state->mlx, i, theme->entire);
-		theme->tiletexs[i].subquad = i <= 2;
+		theme->tiletexs[i].subquad = i < TTEX_TEX_SUB;
 		i++;
 	}
 	return (theme);
 }
+

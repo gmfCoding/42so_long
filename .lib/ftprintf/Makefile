@@ -14,7 +14,7 @@ PRINTFH = ft_printf.h ft_lprintf.h
 OBJDIR = obj/
 CC = cc
 WFLAGS = -Wall -Wextra -Werror
-CFLAGS = $(WFLAGS) -g
+CFLAGS = $(WFLAGS) $(DFLAGS)
 
 # OBJECT FILES
 OBJ = $(patsubst %.c,$(OBJDIR)%.o, $(SRCS))

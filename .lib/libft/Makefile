@@ -52,7 +52,7 @@ SRCSB =	ft_lstnew.c			\
 NAME = libft.a
 OBJDIR = obj/
 CC = clang
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = $(DFLAGS) -Wall -Wextra -Werror
 
 # OBJECT FILES
 OBJ := $(patsubst %.c, $(OBJDIR)%.o, $(SRCS))

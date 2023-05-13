@@ -17,6 +17,22 @@
 # define TILE_FLOOR	1
 # define TILE_COUNT 2
 
+/* Tile Texture (TTEX) Definitions
+ * TTEX_TEX_SUB  -- Defines how many of the first x textures will be sub quads.
+ * TTEX_FLOOR	 -- The Floor			tile texture index.
+ * TTEX_CORNER	 -- The Corner			tile texture index.
+ * TTEX_INVCON	 -- The Inverted Corner	tile texture index.
+ * TTEX_WALL	 -- The Wall			tile texture index.
+ * TTEX_COLL	 -- The Collectable		tile texture index.
+ * TTEX_EXIT	 -- The Exit			tile texture index.
+ * TTEX_PLAYER	 -- The Player			tile texture index.
+ * TTEX_COUNT 	 -- The amount of tile textures in the theme image.
+ * 
+ * TILE_RES		 -- The resolution of each tile
+ * REND_RES		 -- The rendered resolution of the tiles: TILE_RES * REND_RES.
+ * TILE_PX_SCALE -- The REND_RES / TILE_RES
+ * */
+# define TTEX_TEX_SUB 3
 # define TTEX_FLOOR 0
 # define TTEX_CORNER 1
 # define TTEX_INVCON 2

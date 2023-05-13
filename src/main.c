@@ -28,28 +28,30 @@ void	setup_state(t_gamestate *state);
 
 int	end_program(t_gamestate *state)
 {
-	mlx_destroy_window(state->mlx, state->win);
+	
+	destroy_state(state);
 	ft_printf("So long! Bye!");
 	exit(0);
 }
 
 int	main(int argc, char **argv)
 {
-	static t_gamestate	state;
+	static t_gamestate	*state;
 
+	state = ft_calloc(1, sizeof(t_gamestate));
 	if (argc <= 1)
 	{
 		ft_printf("No map specified, please specify a map as an arg!");
-		state.map_path = "assets/example.ber";
+		state->map_path = "assets/example.ber";
 		/* PLEASE EXIT INSTEAD OF DEFAULT MAP PATH*/
 	}
 	else
-		state.map_path = argv[1];
-	setup_state(&state);
-	mlx_loop_hook(state.mlx, on_frame, &state);
-	mlx_hook(state.win, 2, 1L << 0, on_input, (void *)&state);
-	mlx_hook(state.win, 17, 0, end_program, &state);
-	mlx_loop(state.mlx);
+		state->map_path = argv[1];
+	setup_state(state);
+	mlx_loop_hook(state->mlx, on_frame, state);
+	mlx_hook(state->win, 2, 1L << 0, on_input, (void *)state);
+	mlx_hook(state->win, 17, 0, end_program, state);
+	mlx_loop(state->mlx);
 }
 
 void	setup_window(t_gamestate *state)
