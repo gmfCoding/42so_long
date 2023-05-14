@@ -18,7 +18,7 @@ void	destroy_texture(t_gamestate *gs, t_texture tex)
 	mlx_destroy_image(gs->mlx, tex.img);
 }
 
-static destroy_ttex(t_gamestate *gs, t_tiletex *ttex)
+static void	destroy_ttex(t_gamestate *gs, t_tiletex *ttex)
 {
 	if (ttex->subquad)
 	{

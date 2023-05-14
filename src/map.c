@@ -81,7 +81,12 @@ t_map	*load_map(const char *path)
 	if (!map)
 		return (NULL);
 	lst = ft_lst_readfile(path);
-	map->size_y = (int)lst->content;
+	if (lst == NULL)
+	{
+		free(map);
+		return (NULL);
+	}
+	map->size_y = (int)(long long)lst->content;
 	map->size_x = ft_strlen(lst->next->next->content) - 1;
 	map->tiles = ft_calloc(map->size_x * map->size_y, sizeof(t_tile));
 	set_tiles(lst->next, map);

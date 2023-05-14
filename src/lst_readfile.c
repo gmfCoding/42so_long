@@ -19,11 +19,12 @@ t_list	*ft_lst_readfile(const char *path)
 {
 	t_list	*first;
 	t_list	*next;
-	t_list	*new;
 	char	*line;
 	int		fd;
 
 	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
 	first = ft_lstnew((void *)0);
 	next = first;
 	line = get_next_line(fd);

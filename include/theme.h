@@ -20,6 +20,7 @@ struct s_tiletex
 {
 	int			subquad;
 	t_texture	full;
+	int x;
 
 	t_texture	tl;
 	t_texture	tr;

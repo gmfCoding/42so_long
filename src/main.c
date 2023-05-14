@@ -23,6 +23,7 @@
 #include "vectormath.h"
 #include "error.h"
 #include "game.h"
+#include "destroy.h"
 
 void	setup_state(t_gamestate *state);
 
@@ -30,7 +31,7 @@ int	end_program(t_gamestate *state)
 {
 	
 	destroy_state(state);
-	ft_printf("So long! Bye!");
+	ft_printf("So long! Bye!\n");
 	exit(0);
 }
 
@@ -73,15 +74,17 @@ void	setup_world(t_gamestate *state)
 	t_map	*map;
 
 	map = load_map(state->map_path);
-	state->map = map;
-	error = verify_contains(map);
-	error |= verify_boundary(map);
-	error |= map_completeable(map) == 0 * E_PATH;
-	if (error)
+	if (map != NULL)
 	{
-		print_errors(error);
-		exit(1);
+		state->map = map;
+		error = verify_contains(map);
+		error |= verify_boundary(map);
+		error |= map_completeable(map) == 0 * E_PATH;
 	}
+	else
+		error = E_FILE;
+	if (error)
+		exit_error(error);
 	state->tile_event = &on_tile;
 }
 

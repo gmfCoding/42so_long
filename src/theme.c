@@ -46,8 +46,7 @@ t_themeinfo	*load_theme(t_gamestate *state, char *themeimg)
 {
 	t_themeinfo	*theme;
 	int			i;
-	int			x;
-
+	
 	theme = ft_calloc(1, sizeof(t_themeinfo));
 	theme->entire = load_texture(state->mlx, themeimg);
 	i = 0;

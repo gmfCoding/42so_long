@@ -55,6 +55,8 @@ void	on_tile(t_gamestate *state, t_tile *tile, int x, int y)
 {
 	t_vec	*pos;
 	t_map	*map;
+	(void)x;
+	(void)y;
 
 	pos = &state->pos;
 	map = state->map;

@@ -36,8 +36,9 @@ LIB-L = $(patsubst %,-L$(DIRLIB)%, $(dir $(LIBSF)))
 NAME = program
 CC = cc
 
-OFLAGS = $(DFLAGS)  $(LIB-I) -I$(DIRINC)
-CFLAGS = $(DFLAGS)  $(LIB-L) $(LIB-l) -lz -lm 
+WFLAGS = -Wall -Werror -Wextra
+OFLAGS = $(DFLAGS) $(WFLAGS) $(LIB-I) -I$(DIRINC)
+CFLAGS = $(DFLAGS) $(LIB-L) $(LIB-l) -lz -lm 
 
 ifeq ($(DEBUG),1)
 OFLAGS += -g -fsanitize=address
@@ -61,7 +62,7 @@ $(NAME): $(LIBS) $(OBJS)
 # SOURCE TO OBJ
 $(OBJS): $(DIROBJ)%.o : $(DIRSRC)%.c $(INCS)
 	@mkdir -p $(DIROBJ)
-	$(CC) $(OFLAGS) -o $@ -c $<
+	-$(CC) $(OFLAGS) -o $@ -c $<
 
 # COMPILE LIBS
 $(LIBS):

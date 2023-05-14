@@ -20,9 +20,11 @@ typedef enum e_error
 	E_COLL = 2,
 	E_POS = 4,
 	E_BOUND = 8,
-	E_PATH = 16
+	E_PATH = 16,
+	E_FILE = 32
 }			t_error;
 
 void	print_errors(t_error error);
+void	exit_error(t_error error);
 
 #endif
