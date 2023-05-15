@@ -88,7 +88,9 @@ libclean:
 clean:
 	-rm -rf $(DIROBJ)
 
-.PHONY: all $(NAME) fclean clean libclean
+re: fclean all
+
+.PHONY: all re fclean clean libclean
 
 # COLORS
 BLUE = \033[1;34m
