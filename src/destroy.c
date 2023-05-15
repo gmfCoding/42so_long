@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   destroy.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/15 19:45:11 by clovell           #+#    #+#             */
+/*   Updated: 2023/05/15 19:47:32 by clovell          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <mlx.h>
 #include <stdlib.h>
 
@@ -10,7 +22,7 @@ void	destroy_map(t_map **map)
 {
 	free((*map)->tiles);
 	free(*map);
-	*map = NULL; 
+	*map = NULL;
 }
 
 void	destroy_texture(t_gamestate *gs, t_texture tex)
@@ -34,7 +46,7 @@ static void	destroy_ttex(t_gamestate *gs, t_tiletex *ttex)
 void	destroy_theme(t_gamestate *gs, t_themeinfo **theme)
 {
 	t_themeinfo	*th;
-	int	i;
+	int			i;
 
 	th = *theme;
 	i = 0;
@@ -48,9 +60,8 @@ void	destroy_theme(t_gamestate *gs, t_themeinfo **theme)
 	*theme = NULL;
 }
 
-void destroy_state(t_gamestate *state)
+void	destroy_state(t_gamestate *state)
 {
-
 	destroy_theme(state, &state->theme);
 	mlx_destroy_window(state->mlx, state->win);
 	state->mlx = NULL;

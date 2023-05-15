@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:15:01 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 14:44:54 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/15 18:55:37 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef STATE_H
@@ -31,12 +31,14 @@ typedef struct s_gamestate
 
 	int			moves;
 	int			collected;
+	int			frame;
 
 	t_tile_f	tile_event;
 	t_state_f	quit_event;
 
 	t_map		*map;
 	t_vec		pos;
+	t_vec		prevpos;
 	t_themeinfo	*theme;
 }			t_gamestate;
 

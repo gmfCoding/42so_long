@@ -6,12 +6,13 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 19:50:40 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/08 22:25:38 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/15 19:28:54 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "state.h"
 #include "vector.h"
 #include "vectormath.h"
+#include <math.h>
 
 #include "defs.h"
 #include "map.h"
@@ -92,6 +93,7 @@ void	push_tile(t_gamestate *gs, t_vec pos)
 		return ;
 	}
 	p_full_con(gs, q, f, (t_tiletex *)texs);
+	q[0].y = q[0].y + sin(gs->frame / 20.0f) * 10.0f;
 	if (tile.collectable)
-		push_tex(gs, texs[TTEX_COLL].full, q[0]);
+		push_tex(gs, texs[TTEX_COL + (gs->frame / 8) % 3].full, q[0]);
 }

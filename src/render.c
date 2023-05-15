@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:53:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/02 08:19:20 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/15 18:55:18 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -49,11 +49,19 @@ static void	draw_other(t_gamestate *gs)
 
 	texs = gs->theme->tiletexs;
 	push_tex(gs, texs[TTEX_EXIT].full, vmuls(gs->map->exit, REND_RES));
-	push_tex(gs, texs[TTEX_PLAYER].full, vmuls(gs->pos, REND_RES));
+	if (gs->prevpos.y < gs->pos.y)
+		push_tex(gs, gs->theme->player.down, vmuls(gs->pos, REND_RES));
+	else if (gs->prevpos.x < gs->pos.x)
+		push_tex(gs, gs->theme->player.right, vmuls(gs->pos, REND_RES));
+	else if (gs->prevpos.x > gs->pos.x)
+		push_tex(gs, gs->theme->player.left, vmuls(gs->pos, REND_RES));
+	else
+		push_tex(gs, gs->theme->player.top, vmuls(gs->pos, REND_RES));
 }
 
 int	on_frame(t_gamestate *gs)
 {
+	gs->frame++;
 	mlx_clear_window(gs->mlx, gs->win);
 	render_map(gs);
 	draw_other(gs);

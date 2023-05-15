@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 16:32:46 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/02 10:42:53 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/15 19:45:01 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "theme.h"
@@ -45,8 +45,9 @@ static t_tiletex	get_tile_tex(void *mlx, int i, t_texture entire)
 t_themeinfo	*load_theme(t_gamestate *state, char *themeimg)
 {
 	t_themeinfo	*theme;
+	t_texture	player;
 	int			i;
-	
+
 	theme = ft_calloc(1, sizeof(t_themeinfo));
 	theme->entire = load_texture(state->mlx, themeimg);
 	i = 0;
@@ -56,6 +57,10 @@ t_themeinfo	*load_theme(t_gamestate *state, char *themeimg)
 		theme->tiletexs[i].subquad = i < TTEX_TEX_SUB;
 		i++;
 	}
+	player = get_tile_tex(state->mlx, TTEX_PLAYER, theme->entire).full;
+	theme->player.top = player;
+	theme->player.right = rotate_tex(state->mlx, player, 1);
+	theme->player.down = rotate_tex(state->mlx, player, 2);
+	theme->player.left = rotate_tex(state->mlx, player, 3);
 	return (theme);
 }
-

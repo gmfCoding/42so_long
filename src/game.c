@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:24:33 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 14:45:21 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/15 16:38:34 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "state.h"
@@ -36,9 +36,11 @@ int	on_input(int key, t_gamestate *state)
 {
 	t_vec	*pos;
 	t_map	*map;
+	t_vec	prev;
 
 	map = state->map;
 	pos = &state->pos;
+	prev = state->pos;
 	if (key == KEY_W && can_move(*pos, vnew(0, -1), map))
 		count_move(state, &pos->y, -1);
 	if (key == KEY_A && can_move(*pos, vnew(-1, 0), map))
@@ -47,6 +49,8 @@ int	on_input(int key, t_gamestate *state)
 		count_move(state, &pos->y, 1);
 	if (key == KEY_D && can_move(*pos, vnew(1, 0), map))
 		count_move(state, &pos->x, 1);
+	if (vmag(vsub(prev, *pos)) > 0.01f)
+		state->prevpos = prev;
 	state->tile_event(state, get_tile_ptr(pos->x, pos->y, map), pos->x, pos->y);
 	return (0);
 }
@@ -55,9 +59,9 @@ void	on_tile(t_gamestate *state, t_tile *tile, int x, int y)
 {
 	t_vec	*pos;
 	t_map	*map;
+
 	(void)x;
 	(void)y;
-
 	pos = &state->pos;
 	map = state->map;
 	if (tile->collectable > 0)
