@@ -6,10 +6,12 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:53:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/15 18:55:18 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/17 21:20:14 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
+#include <stdlib.h>
+
 #include "state.h"
 #include "texture.h"
 #include "libft.h"
@@ -61,9 +63,17 @@ static void	draw_other(t_gamestate *gs)
 
 int	on_frame(t_gamestate *gs)
 {
+	char	*tmp;
+	char	*str;
+
 	gs->frame++;
 	mlx_clear_window(gs->mlx, gs->win);
 	render_map(gs);
 	draw_other(gs);
+	tmp = ft_itoa(gs->moves);
+	str = ft_strjoin("Moves:", tmp);
+	free(tmp);
+	mlx_string_put(gs->mlx, gs->win, 6, 16, 0x00000000, str);
+	mlx_string_put(gs->mlx, gs->win, 5, 15, 0x00FFFFFF, str);
 	return (0);
 }
