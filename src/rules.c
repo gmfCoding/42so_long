@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 19:50:40 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/15 19:28:54 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/17 14:16:25 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "state.h"
@@ -30,8 +30,8 @@ static int	push_quad(t_gamestate *gs, t_texture tex, t_vec pos, int cond)
 	return (cond);
 }
 
-/* Sets an array, f, of neighbours to be 1 if that neighbours is a wall */
-void	get_neighbours(int *f, t_map *map, int x, int y)
+/* Sets an array, n, of neighbours to be 1 if that neighbours is a wall */
+static void	get_neighbours(int *n, t_map *map, int x, int y)
 {
 	const t_vec	dir[] = {vnew(0, -1), vnew(1, 0), vnew(0, 1), vnew(-1, 0)};
 	int			d;
@@ -40,60 +40,60 @@ void	get_neighbours(int *f, t_map *map, int x, int y)
 	while (d < 4)
 	{
 		if (!bounds(map, x + dir[d].x, y + dir[d].y))
-			f[d] = TILE_FLOOR;
+			n[d] = TILE_FLOOR;
 		else
-			f[d] = get_tile(x + dir[d].x, y + dir[d].y, map).id == TILE_WALL;
+			n[d] = get_tile(x + dir[d].x, y + dir[d].y, map).id == TILE_WALL;
 		d++;
 	}
 }
 
-/* q: quads pos
- * f: neighbours
+/* p: positions
+ * n: neighbours
  * texs: tile textures */
-static void	p_full_con(t_gamestate *gs, t_vec *q, int *f, t_tiletex *texs)
+static void	p_full_con(t_gamestate *gs, t_vec *p, int *n, t_tiletex *texs)
 {
-	if (!push_quad(gs, texs[TTEX_CORNER].tl, q[0], f[U] && f[L]))
-		push_quad(gs, texs[TTEX_FLOOR].tl, q[0], 1);
-	if (!push_quad(gs, texs[TTEX_CORNER].tr, q[1], f[U] && f[R]))
-		push_quad(gs, texs[TTEX_FLOOR].tr, q[1], 1);
-	if (!push_quad(gs, texs[TTEX_CORNER].bl, q[2], f[D] && f[L]))
-		push_quad(gs, texs[TTEX_FLOOR].bl, q[2], 1);
-	if (!push_quad(gs, texs[TTEX_CORNER].br, q[3], f[D] && f[R]))
-		push_quad(gs, texs[TTEX_FLOOR].br, q[3], 1);
+	if (!push_quad(gs, texs[TTEX_CORNER].tl, p[0], n[U] && n[L]))
+		push_quad(gs, texs[TTEX_FLOOR].tl, p[0], 1);
+	if (!push_quad(gs, texs[TTEX_CORNER].tr, p[1], n[U] && n[R]))
+		push_quad(gs, texs[TTEX_FLOOR].tr, p[1], 1);
+	if (!push_quad(gs, texs[TTEX_CORNER].bl, p[2], n[D] && n[L]))
+		push_quad(gs, texs[TTEX_FLOOR].bl, p[2], 1);
+	if (!push_quad(gs, texs[TTEX_CORNER].br, p[3], n[D] && n[R]))
+		push_quad(gs, texs[TTEX_FLOOR].br, p[3], 1);
 }
 
-/* q: quads
- * f: neighbours
+/* p: positions
+ * n: neighbours
  * texs: tile textures */
-static void	p_invcon(t_gamestate *gs, t_vec q[4], int f[4], t_tiletex *texs)
+static void	p_invcon(t_gamestate *gs, t_vec p[4], int n[4], t_tiletex *texs)
 {
-	push_quad(gs, texs[TTEX_INVCON].tl, q[0], !f[U] && !f[L]);
-	push_quad(gs, texs[TTEX_INVCON].tr, q[1], !f[U] && !f[R]);
-	push_quad(gs, texs[TTEX_INVCON].bl, q[2], !f[D] && !f[L]);
-	push_quad(gs, texs[TTEX_INVCON].br, q[3], !f[D] && !f[R]);
+	push_quad(gs, texs[TTEX_INVCON].tl, p[0], !n[U] && !n[L]);
+	push_quad(gs, texs[TTEX_INVCON].tr, p[1], !n[U] && !n[R]);
+	push_quad(gs, texs[TTEX_INVCON].bl, p[2], !n[D] && !n[L]);
+	push_quad(gs, texs[TTEX_INVCON].br, p[3], !n[D] && !n[R]);
 }
 
 void	push_tile(t_gamestate *gs, t_vec pos)
 {
 	const int		res = TILE_RES / 2 * 3;
 	const t_tiletex	*texs = gs->theme->tiletexs;
-	int				f[4];
-	t_vec			q[4];
+	int				n[4];
+	t_vec			p[4];
 	t_tile			tile;
 
 	tile = get_tile(pos.x, pos.y, gs->map);
-	q[0] = vadd(vmuls(pos, REND_RES), vnew(0, 0));
-	q[1] = vadd(vmuls(pos, REND_RES), vnew(res, 0));
-	q[2] = vadd(vmuls(pos, REND_RES), vnew(0, res));
-	q[3] = vadd(vmuls(pos, REND_RES), vnew(res, res));
-	get_neighbours(f, gs->map, pos.x, pos.y);
+	p[0] = vadd(vmuls(pos, REND_RES), vnew(0, 0));
+	p[1] = vadd(vmuls(pos, REND_RES), vnew(res, 0));
+	p[2] = vadd(vmuls(pos, REND_RES), vnew(0, res));
+	p[3] = vadd(vmuls(pos, REND_RES), vnew(res, res));
+	get_neighbours(n, gs->map, pos.x, pos.y);
 	if (tile.id == TILE_WALL)
 	{
-		p_invcon(gs, q, f, (t_tiletex *)texs);
+		p_invcon(gs, p, n, (t_tiletex *)texs);
 		return ;
 	}
-	p_full_con(gs, q, f, (t_tiletex *)texs);
-	q[0].y = q[0].y + sin(gs->frame / 20.0f) * 10.0f;
+	p_full_con(gs, p, n, (t_tiletex *)texs);
+	p[0].y = p[0].y + sin(gs->frame / 20.0f) * 10.0f;
 	if (tile.collectable)
-		push_tex(gs, texs[TTEX_COL + (gs->frame / 8) % 3].full, q[0]);
+		push_tex(gs, texs[TTEX_COL + (gs->frame / 8) % 3].full, p[0]);
 }

@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/15 16:36:52 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/17 15:18:35 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -31,6 +31,7 @@ int	end_program(t_gamestate *state)
 {
 	destroy_state(state);
 	ft_printf("So long! Bye!\n");
+	free(state);
 	exit(0);
 }
 
@@ -42,8 +43,7 @@ int	main(int argc, char **argv)
 	if (argc <= 1)
 	{
 		ft_printf("No map specified, please specify a map as an arg!");
-		state->map_path = "assets/example.ber";
-		/* PLEASE EXIT INSTEAD OF DEFAULT MAP PATH*/
+		exit(0);
 	}
 	else
 		state->map_path = argv[1];
