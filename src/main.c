@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/17 15:18:35 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/17 21:29:40 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -31,7 +31,6 @@ int	end_program(t_gamestate *state)
 {
 	destroy_state(state);
 	ft_printf("So long! Bye!\n");
-	free(state);
 	exit(0);
 }
 

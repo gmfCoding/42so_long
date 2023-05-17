@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:30:29 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/15 16:37:23 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/17 21:28:34 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ t_texture	rotate_tex(void *mlx, t_texture t, int rot)
 		while (x < t.width)
 		{
 			if (rot == 1)
-				pxput(dst, x, y, pxget(t, y, -x + t.width));
+				pxput(dst, x, y, pxget(t, y, t.width - x - 1));
 			else if (rot == 2)
-				pxput(dst, x, y, pxget(t, -x + t.width, -y + t.height));
+				pxput(dst, x, y, pxget(t, t.width - x - 1, t.height - y - 1));
 			else if (rot == 3)
-				pxput(dst, x, y, pxget(t, -y + t.height, x));
+				pxput(dst, x, y, pxget(t, t.height - y - 1, x));
 			else
 				pxput(dst, x, y, pxget(t, x, y));
 			x++;
