@@ -6,14 +6,15 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 21:27:24 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/12 20:25:56 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/19 18:52:51 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdlib.h>
 #include "lst_extra.h"
 #include "libft.h"
 #include "map.h"
 #include "vector.h"
-#include <stdlib.h>
+#include "error.h"
 
 static t_tile	make_tile(char type, int x, int y, t_map *map)
 {
@@ -37,7 +38,7 @@ static t_tile	make_tile(char type, int x, int y, t_map *map)
 	return (def);
 }
 
-static void	set_tiles(t_list *lst, t_map *map)
+static t_error	set_tiles(t_list *lst, t_map *map)
 {
 	int		x;
 	int		y;
@@ -57,9 +58,12 @@ static void	set_tiles(t_list *lst, t_map *map)
 			map->tiles[y * map->size_x + x] = tile;
 			x++;
 		}
+		if (x != map->size_x)
+			return (E_WIDTH);
 		lst = lst->next;
 		y++;
 	}
+	return (E_NONE);
 }
 
 t_tile	*get_tile_ptr(int x, int y, t_map *map)
@@ -76,6 +80,7 @@ t_map	*load_map(const char *path)
 {
 	t_list	*lst;
 	t_map	*map;
+	t_error	failed;
 
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
@@ -89,8 +94,11 @@ t_map	*load_map(const char *path)
 	map->size_y = (int)(long long)lst->content;
 	map->size_x = ft_strlen(lst->next->next->content) - 1;
 	map->tiles = ft_calloc(map->size_x * map->size_y, sizeof(t_tile));
-	set_tiles(lst->next, map);
+	failed = set_tiles(lst->next, map);
 	ft_lstclear(&lst->next, free);
 	free(lst);
-	return (map);
+	if (failed == E_NONE)
+		return (map);
+	print_errors(failed);
+	return (NULL);
 }

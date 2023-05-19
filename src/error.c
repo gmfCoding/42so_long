@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:02:06 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/17 21:47:59 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/19 19:04:05 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -29,6 +29,10 @@ void	print_errors(t_error error)
 		ft_printf("Map leaks into the void, cannot load map!\n");
 	if (error & E_FILE)
 		ft_printf("Map file cannot be read!\n");
+	if (error & E_WIDTH)
+		ft_printf("Map file is not rectangular, cannot load map!\n");
+	if (error & E_SYMB)
+		ft_printf("Unexpected characters in map file, cannot load map!");
 }
 
 void	exit_error(t_error error)

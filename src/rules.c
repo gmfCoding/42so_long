@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 19:50:40 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/17 14:16:25 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/19 18:49:19 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "state.h"
@@ -75,7 +75,7 @@ static void	p_invcon(t_gamestate *gs, t_vec p[4], int n[4], t_tiletex *texs)
 
 void	push_tile(t_gamestate *gs, t_vec pos)
 {
-	const int		res = TILE_RES / 2 * 3;
+	const int		res = TILE_RES / 2 * TILE_PX_SCALE;
 	const t_tiletex	*texs = gs->theme->tiletexs;
 	int				n[4];
 	t_vec			p[4];
@@ -93,7 +93,8 @@ void	push_tile(t_gamestate *gs, t_vec pos)
 		return ;
 	}
 	p_full_con(gs, p, n, (t_tiletex *)texs);
-	p[0].y = p[0].y + sin(gs->frame / 20.0f) * 10.0f;
-	if (tile.collectable)
-		push_tex(gs, texs[TTEX_COL + (gs->frame / 8) % 3].full, p[0]);
+	if (!tile.collectable)
+		return ;
+	p[0].y = p[0].y + sin(gs->frame / 2.0f * FRAME_RATE) * 10.0f;
+	push_tex(gs, texs[TTEX_COL + (gs->frame / 8) % 3].full, p[0]);
 }

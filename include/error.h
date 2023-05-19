@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 12:21:28 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 13:52:24 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/19 18:52:28 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ typedef enum e_error
 	E_POS = 4,
 	E_BOUND = 8,
 	E_PATH = 16,
-	E_FILE = 32
+	E_FILE = 32,
+	E_WIDTH = 64
 }			t_error;
 
 void	print_errors(t_error error);
