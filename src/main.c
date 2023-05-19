@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/17 21:29:40 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/17 21:37:57 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 	state = ft_calloc(1, sizeof(t_gamestate));
 	if (argc <= 1)
 	{
-		ft_printf("No map specified, please specify a map as an arg!");
+		ft_printf("Error\nNo map specified, please specify a map as an arg!");
 		exit(0);
 	}
 	else
