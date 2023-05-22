@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 20:21:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 14:16:06 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/22 15:35:17 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_map
 /* map.c */
 t_tile	*get_tile_ptr(int x, int y, t_map *map);
 t_tile	get_tile(int x, int y, t_map *map);
-t_map	*load_map(const char *path);
+t_map	*load_map(const char *path, t_error *failed);
 
 /* tile.c */
 t_tile	new_c_tile(int id, int collectable);

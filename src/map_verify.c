@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 21:48:58 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/11 14:56:42 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/22 17:02:16 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -54,14 +54,18 @@ t_error	verify_boundary(t_map *map)
 {
 	int	y;
 	int	x;
+	int	bound_x;
+	int	bound_y;
 
 	y = 0;
 	while (y < map->size_y)
 	{
+		bound_x = (y == 0 || y == map->size_y - 1);
 		x = 0;
-		while ((y == 0 || y == map->size_y - 1) && x < map->size_x)
+		while (x < map->size_x)
 		{
-			if ((x == 0 || x == map->size_x - 1))
+			bound_y = (x == 0 || x == map->size_x - 1);
+			if (bound_x || bound_y)
 				if (get_tile(x, y, map).id != TILE_WALL)
 					return (E_BOUND);
 			x++;

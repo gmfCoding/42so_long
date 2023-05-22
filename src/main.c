@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:38:45 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/17 21:37:57 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/22 17:41:41 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -71,16 +71,20 @@ void	setup_world(t_gamestate *state)
 	t_error	error;
 	t_map	*map;
 
-	map = load_map(state->map_path);
-	if (map != NULL)
+	error = E_NONE;
+	map = load_map(state->map_path, &error);
+	if (!error)
 	{
-		state->map = map;
-		error = verify_contains(map);
-		error |= verify_boundary(map);
-		error |= map_completeable(map) == 0 * E_PATH;
+		if (map != NULL)
+		{
+			state->map = map;
+			error |= verify_contains(map);
+			error |= verify_boundary(map);
+			error |= (map_completeable(map) == 0) * E_PATH;
+		}
+		else
+			error = E_FILE;
 	}
-	else
-		error = E_FILE;
 	if (error)
 		exit_error(error);
 	state->tile_event = &on_tile;
