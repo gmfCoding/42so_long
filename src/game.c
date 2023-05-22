@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:24:33 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/15 16:38:34 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/22 17:53:49 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "state.h"
@@ -41,6 +41,8 @@ int	on_input(int key, t_gamestate *state)
 	map = state->map;
 	pos = &state->pos;
 	prev = state->pos;
+	if (key == KEY_ESC)
+		state->quit_event(state);
 	if (key == KEY_W && can_move(*pos, vnew(0, -1), map))
 		count_move(state, &pos->y, -1);
 	if (key == KEY_A && can_move(*pos, vnew(-1, 0), map))
