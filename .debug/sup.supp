@@ -1,6 +1,0 @@
-{
-   <libmlx>
-   Memcheck:Leak
-   ...
-   fun:mlx_init
-}
