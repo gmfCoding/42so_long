@@ -6,7 +6,7 @@
 /*   By: clovell <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 18:53:37 by clovell           #+#    #+#             */
-/*   Updated: 2023/05/17 21:20:14 by clovell          ###   ########.fr       */
+/*   Updated: 2023/05/24 16:03:54 by clovell          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -75,5 +75,6 @@ int	on_frame(t_gamestate *gs)
 	free(tmp);
 	mlx_string_put(gs->mlx, gs->win, 6, 16, 0x00000000, str);
 	mlx_string_put(gs->mlx, gs->win, 5, 15, 0x00FFFFFF, str);
+	free(str);
 	return (0);
 }
